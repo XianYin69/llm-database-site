@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0.0",
+  "last_updated": "2026-10-15T23:03:00Z",
+  "providers": [
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "website": "https://openai.com",
+      "api_base": "https://api.openai.com",
+      "auth_type": "api_key"
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "website": "https://anthropic.com",
+      "api_base": "https://api.anthropic.com",
+      "auth_type": "api_key"
+    },
+    {
+      "id": "google",
+      "name": "Google AI",
+      "website": "https://ai.google.dev",
+      "api_base": "https://generativivanguage.googleapis.com",
+      "auth_type": "api_key"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "website": "https://mistral.ai",
+      "api_base": "https://api.mistral.ai",
+      "auth_type": "api_key"
+    }
+  ],
+  "models": [
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "provider_id": "openai",
+      "input_token_price": 2.50,
+      "output_token_price": 10.00,
+      "context_window": 128000,
+      "rate_limits": {
+        "requests_per_minute": 5000,
+        "tokens_per_minute": 1000000
+      },
+      "supports_json_mode": true,
+      "supports_vision": true
+    },
+    {
+      "id": "gpt-4o-mini",
+      "name": "GPT-4o Mini",
+      "provider_id": "openai",
+      "input_token_price": 0.15,
+      "output_token_price": 0.60,
+      "context_window": 128000,
+      "rate_limits": {
+        "requests_per_minute": 10000,
+        "tokens_per_minute": 5000000
+      },
+      "supports_json_mode": true,
+      "supports_vision": true
+    },
+    {
+      "id": "claude-3-opus",
+      "name": "Claude 3 Opus",
+      "provider_id": "anthropic",
+      "input_token_price": 15.00,
+      "output_token_price": 75.00,
+      "context_window": 200000,
+      "rate_limits": {
+        "requests_per_minute": 1000,
+        "tokens_per_minute": 250000
+      },
+      "supports_json_mode": true,
+      "supports_vision": true
+    },
+    {
+      "id": "claude-3-sonnet",
+      "name": "Claude 3 Sonnet",
+      "provider_id": "anthropic",
+      "input_token_price": 3.00,
+      "output_token_price": 15.00,
+      "context_window": 200000,
+      "rate_limits": {
+        "requests_per_minute": 4000,
+        "tokens_per_minute": 1000000
+      },
+      "supports_json_mode": true,
+      "supports_vision": true
+    },
+    {
+      "id": "claude-3-haiku",
+      "name": "Claude 3 Haiku",
+      "provider_id": "anthropic",
+      "input_token_price": 0.25,
+      "output_token_price": 1.25,
+      "context_window": 200000,
+      "rate_limits": {
+        "requests_per_minute": 5000,
+        "tokens_per_minute": 2500000
+      },
+      "supports_json_mode": true,
+      "supports_vision": true
+    },
+    {
+      "id": "gemini-1.5-pro",
+      "name": "Gemini 1.5 Pro",
+      "provider_id": "google",
+      "input_token_price": 1.25,
+      "output_token_price": 5.00,
+      "context_window": 1000000,
+      "rate_limits": {
+        "requests_per_minute": 2000,
+        "tokens_per_minute": 1000000
+      },
+      "supports_json_mode": true,
+      "supports_vision": true
+    },
+    {
+      "id": "gemini-1.5-flash",
+      "name": "Gemini 1.5 Flash",
+      "provider_id": "google",
+      "input_token_price": 0.075,
+      "output_token_price": 0.30,
+      "context_window": 1000000,
+      "rate_limits": {
+        "requests_per_minute": 10000,
+        "tokens_per_minute": 5000000
+      },
+      "supports_json_mode": true,
+      "supports_vision": true
+    },
+    {
+      "id": "mistral-large",
+      "name": "Mistral Large",
+      "provider_id": "mistral",
+      "input_token_price": 2.00,
+      "output_token_price": 6.00,
+      "context_window": 128000,
+      "rate_limits": {
+        "requests_per_minute": 500,
+        "tokens_per_minute": 200000
+      },
+      "supports_json_mode": true,
+      "supports_vision": false
+    },
+    {
+      "id": "codestral",
+      "name": "Codestral",
+      "provider_id": "mistral",
+      "input_token_price": 0.30,
+      "output_token_price": 0.90,
+      "context_window": 32000,
+      "rate_limits": {
+        "requests_per_minute": 1000,
+        "tokens_per_minute": 500000
+      },
+      "supports_json_mode": false,
+      "supports_vision": false
+    }
+  ],
+  "endpoints": [
+    {
+      "id": "openai-chat",
+      "model_id": "gpt-4o",
+      "path": "/v1/chat/completions",
+      "method": "POST"
+    },
+    {
+      "id": "anthropic-messages",
+      "model_id": "claude-3-opus",
+      "path": "/v1/messages",
+      "method": "POST"
+    },
+    {
+      "id": "google-generate",
+      "model_id": "gemini-1.5-pro",
+      "path": "/v1/models/gemini-1.5-pro:generateContent",
+      "method": "POST"
+    },
+    {
+      "id": "mistral-chat",
+      "model_id": "mistral-large",
+      "path": "/v1/chat/completions",
+      "method": "POST"
+    }
+  ]
+}
