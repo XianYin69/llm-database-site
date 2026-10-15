@@ -31,7 +31,7 @@ npm start
 ## File Structure
 
 ```
-llm-database-sms/
+llm-database-site/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml    # GitHub Actions CI/CD
@@ -47,18 +47,10 @@ llm-database-sms/
 
 The application loads pricing data from `llm_pricing_data.json`, which includes:
 
-### Providers
-
-- **OpenAI**: GPT-4o, GPT-4o-mini, o1-preview, o1-mini, GPT-4 Turbo
-- **Anthropic**: Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Haiku, Claude 3.5 Haiku
-- **Google**: Gemini 2.0 Flash, Gemini 2.0 Flash Thinking, Gemini 2.0 Pro Exp, Gemini 1.5 Pro
+- **OpenAI**: GPT-4o, GPT-4o-mini, o1-preview, o1-mini
+- **Anthropic**: Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Haiku
+- **Google**: Gemini 2.0 Flash, Gemini 2.0 Flash Thinking, Gemini 2.0 Pro Exp
 - **Mistral**: Mistral Large, Mistral Medium, Codestral
-- **DeepSeek (deepseek)**: DeepSeek Chat V2, DeepSeek Coder V2, DeepSeek R1
-- **GLM (智谱 AI)**: GLM-4 Plus, GLM-4 Air, GLM-4 Flash
-- **Kimi (月之暗面)**: Kimi K2, Kimi K1.5, Kimi Latest
-- **OpenRouter**: Anthropic Claude, OpenAI GPT, Google Gemini, DeepSeek, Mistral, Llama
-- **KiloCode**: GPT-4o, Claude 3.5 Sonnet, DeepSeek
-- **SenseNova (硅基流动)**: SenseArch Bolt, SenseArch Pro
 
 ## Customization
 

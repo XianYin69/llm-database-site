@@ -1,7 +1,9 @@
-// LLM Pricing Database - Frontend Application
-const modelsData = [];
-let activeFilter = 'all';
+// LLM Database Explorer - Frontend Application
+// Data sourced from llm_pricing_data.json
 
+const modelsData = [];
+
+// Initialize with pricing data
 async function loadModels() {
     try {
         const response = await fetch('llm_pricing_data.json');
@@ -12,122 +14,124 @@ async function loadModels() {
                 modelsData.push({
                     id: model.model_id,
                     name: model.model_id,
-                    provider: provider.provider,
+                    developer: provider.provider,
+                    tags: ["pricing", provider.provider],
                     description: model.description || `${provider.provider} model`,
+                    releaseDate: new Date(data.generated_at).toISOString().split('T')[0],
                     contextWindow: model.context_length,
-                    inputPrice: model.input_price_per_million,
-                    outputPrice: model.output_price_per_million,
-                    timestamp: data.generated_at
+                    inputPricePerMillion: model.input_price_per_million,
+                    outputPricePerMillion: model.output_price_per_million
                 });
             });
         });
         
-        initFilters();
         renderModels(modelsData);
-        updateStats();
     } catch (error) {
-        console.error('Failed to load data:', error);
-        document.getElementById('modelsGrid').innerHTML = 
-            '<div class="no-results"><h3>Failed to load data</h3><p>Please check the JSON file</p></div>';
+        console.error('Failed to load pricing data:', error);
+        // Fallback to static data if JSON fails to load
+        fallbackData();
     }
 }
 
-function initFilters() {
-    const providers = [...new Set(modelsData.map(m => m.provider))];
-    const filterGroup = document.getElementById('filterGroup');
-    
-    providers.forEach(provider => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.dataset.filter = provider;
-        btn.textContent = provider;
-        filterGroup.appendChild(btn);
-    });
-    
-    filterGroup.addEventListener('click', (e) => {
-        if (e.target.classList.contains('filter-btn')) {
-            filterGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            activeFilter = e.target.dataset.filter;
-            applyFilters();
+function fallbackData() {
+    // Static fallback data
+    const staticData = [
+        {
+            id: "gpt-4o",
+            name: "GPT-4o",
+            developer: "OpenAI",
+            tags: ["proprietary", "multimodal", "reasoning"],
+            description: "Advanced reasoning model with improved accuracy and safety.",
+            releaseDate: "2023-03-14",
+            contextWindow: 128000,
+            inputPricePerMillion: 2.5,
+            outputPricePerMillion: 10.0
+        },
+        {
+            id: "claude-3-opus",
+            name: "Claude 3 Opus",
+            developer: "Anthropic",
+            tags: ["proprietary", "reasoning", "long-context"],
+            description: "Most capable Claude model for complex tasks.",
+            releaseDate: "2024-02-08",
+            contextWindow: 200000,
+            inputPricePerMillion: 15.0,
+            outputPricePerMillion: 75.0
+        },
+        {
+            id: "gemini-2.0-flash",
+            name: "Gemini 2.0 Flash",
+            developer: "Google",
+            tags: ["proprietary", "multimodal", "fast"],
+            description: "Google's fast multimodal model with 1M context window.",
+            releaseDate: "2024-10-22",
+            contextWindow: 1048576,
+            inputPricePerMillion: 0.1,
+            outputPricePerMillion: 0.4
         }
-        });
-}
-
-function applyFilters() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    let filtered = modelsData;
+    ];
     
-    if (activeFilter !== 'all') {
-        filtered = filtered.filter(m => m.provider === activeFilter);
-    }
-    
-    if (searchTerm) {
-        filtered = filtered.filter(m => 
-            m.name.toLowerCase().includes(searchTerm) || 
-            m.provider.toLowerCase().includes(searchTerm) ||
-            m.description.toLowerCase().includes(searchTerm)
-        );
-    }
-    
-    renderModels(filtered);
-    updateStats(filtered);
+    renderModels(staticData);
 }
 
 function renderModels(models) {
     const grid = document.getElementById('modelsGrid');
+    grid.innerHTML = '';
     
-    if (models.length === 0) {
-        grid.innerHTML = '<div class="no-results"><h3>No models found</h3><p>Try adjusting your search or filters</p></div>';
-        return;
-    }
+    models.forEach(model => {
+        const card = document.createElement('div');
+        card.className = 'model-card';
+        card.innerHTML = `
+            <h3>${model.name}</h3>
+            <p class="developer">${model.developer}</p>
+            <div class="tags">
+                ${model.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+            <p class="description">${model.description}</p>
+            <div class="meta">
+                <span>Released: ${model.releaseDate}</span>
+                <span>Context: ${model.contextWindow.toLocaleString()}</span>
+            </div>
+            ${model.inputPricePerMillion !== undefined ? `
+            <div class="pricing">
+                <span class="price">💰 Input: $${model.inputPricePerMillion}/M</span>
+                <span class="price">💰 Output: $${model.outputPricePerMillion}/M</span>
+            </div>
+            ` : ''}
+        `;
+        grid.appendChild(card);
+    });
     
-    grid.innerHTML = models.map(model => `
-        <div class="model-card">
-            <div class="card-header">
-                <div class="model-name">${model.name}</div>
-                <span class="provider-badge">${model.provider}</span>
-            </div>
-            <p class="model-desc">${model.description}</p>
-            <div class="model-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Context</span>
-                    <span class="meta-value">${formatNumber(model.contextWindow)}</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Input ($/M)</span>
-                    <span class="meta-value price-highlight">${model.inputPrice.toFixed(2)}</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Output ($/M)</span>
-                    <span class="meta-value">${model.outputPrice.toFixed(2)}</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Ratio</span>
-                    <span class="meta-value">${(model.outputPrice / model.inputPrice).toFixed(1)}x</span>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    updateStats(models);
 }
 
-function updateStats(models = modelsData) {
+function updateStats(models) {
     document.getElementById('totalCount').textContent = models.length;
-    const providers = new Set(models.map(m => m.provider));
-    document.getElementById('providerCount').textContent = providers.size;
-    
-    const date = new Date(models[0]?.timestamp || Date.now());
-    document.getElementById('lastUpdated').textContent = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const categories = new Set(models.flatMap(m => m.tags));
+    document.getElementById('categoryCount').textContent = categories.size;
 }
 
-function formatNumber(num) {
-    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-    if (num >= 1000) return (num / 1000).toFixed(0) + 'K';
-    return num.toString();
+function searchModels(query) {
+    const filtered = modelsData.filter(model => 
+        model.name.toLowerCase().includes(query.toLowerCase()) ||
+        model.developer.toLowerCase().includes(query.toLowerCase()) ||
+        model.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+    );
+    renderModels(filtered);
 }
 
-// Event listeners
-document.getElementById('searchInput').addEventListener('input', applyFilters);
+// Event Listeners
+document.getElementById('searchBtn').addEventListener('click', () => {
+    const query = document.getElementById('searchInput').value;
+    searchModels(query);
+});
 
-// Initialize
+document.getElementById('searchInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const query = e.target.value;
+        searchModels(query);
+    }
+});
+
+// Load models on startup
 loadModels();
