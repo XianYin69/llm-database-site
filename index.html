@@ -8,34 +8,101 @@
 </head>
 <body>
     <header>
-        <h1>🤖 LLM Database Explorer</h1>
-        <p>Explore and compare Large Language Models</p>
+        <h1>LLM Database Explorer</h1>
+        <p>Compare pricing and specifications across major AI model providers</p>
     </header>
     
     <main>
-        <section class="search-section">
-            <input type="text" id="searchInput" placeholder="Search models...">
-            <button id="searchBtn">Search</button>
+        <section class="filters-section" aria-label="Search and filters">
+            <div class="search-row">
+                <input type="text" id="searchInput" placeholder="Search by model name, provider, or tag..." aria-label="Search models">
+                <button id="searchBtn">Search</button>
+            </div>
+            
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="providerFilter">Provider:</label>
+                    <select id="providerFilter">
+                        <option value="">All Providers</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="modelTypeFilter">Model Type:</label>
+                    <select id="modelTypeFilter">
+                        <option value="">All Types</option>
+                        <option value="general">General</option>
+                        <option value="reasoning">Reasoning</option>
+                        <option value="code">Code</option>
+                        <option value="multimodal">Multimodal</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="priceSort">Sort by Price:</label>
+                    <select id="priceSort">
+                        <option value="">Default</option>
+                        <option value="input-asc">Input Price (Low-High)</option>
+                        <option value="input-desc">Input Price (High-Low)</option>
+                        <option value="output-asc">Output Price (Low-High)</option>
+                        <option value="output-desc">Output Price (High-Low)</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="contextFilter">Min Context:</label>
+                    <select id="contextFilter">
+                        <option value="0">Any</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="price-range-row">
+                <div class="filter-group">
+                    <label for="minInputPrice">Input $/M min:</label>
+                    <input type="number" id="minInputPrice" step="0.01" min="0" placeholder="0">
+                </div>
+                <div class="filter-group">
+                    <label for="maxInputPrice">Input $/M max:</label>
+                    <input type="number" id="maxInputPrice" step="0.01" min="0" placeholder="∞">
+                </div>
+                <div class="filter-group">
+                    <label for="minOutputPrice">Output $/M min:</label>
+                    <input type="number" id="minOutputPrice" step="0.01" min="0" placeholder="0">
+                </div>
+                <div class="filter-group">
+                    <label for="maxOutputPrice">Output $/M max:</label>
+                    <input type="number" id="maxOutputPrice" step="0.01" min="0" placeholder="∞">
+                </div>
+            </div>
+            
+            <div class="filter-row">
+                <button class="clear-filters" id="clearBtn">Clear Filters</button>
+            </div>
         </section>
         
-        <section class="models-grid" id="modelsGrid">
-            <!-- Models will be loaded dynamically -->
+        <section class="models-grid" id="modelsGrid" aria-label="Model cards">
+            <!-- Models loaded dynamically -->
         </section>
         
-        <section class="stats" id="stats">
+        <section class="stats-section" id="stats" aria-label="Statistics">
             <div class="stat-card">
                 <h3>Total Models</h3>
                 <p id="totalCount">0</p>
             </div>
             <div class="stat-card">
-                <h3>Categories</h3>
-                <p id="categoryCount">0</p>
+                <h3>Providers</h3>
+                <p id="providerCount">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Avg Input</h3>
+                <p id="avgInputPrice">$0</p>
             </div>
         </section>
     </main>
     
     <footer>
-        <p>LLM Database Explorer &copy; 2026 | Built with GitHub Pages</p>
+        <p>LLM Database Explorer &copy; 2026 | Data sourced from public pricing information</p>
     </footer>
     
     <script src="app.js"></script>
