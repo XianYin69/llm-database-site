@@ -44,3 +44,14 @@ redlines/
 registry/
 chains/
 ../../../../../
+# runtime artifacts (bulk sync guard)
+log/
+logic_con.jsonl
+logic_pro.jsonl
+memory.json
+runtime.json
+runtime/
+sandbox/
+skill/
+trust.json
+workspaces/
