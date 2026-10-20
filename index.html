@@ -1,110 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Database Explorer</title>
+    <title>LLM Database Explorer · 大模型厂商数据库</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header class="site-header">
         <h1>LLM Database Explorer</h1>
-        <p>Compare pricing and specifications across major AI model providers</p>
+        <p class="subtitle">大模型厂商 / 服务提供商 · 价格、参数、峰谷时段与最新动态</p>
+        <p class="data-meta" id="dataMeta">数据截至 —</p>
     </header>
-    
+
     <main>
-        <section class="filters-section" aria-label="Search and filters">
+        <!-- 分组导航：海外 / 国内 / 聚合网关 -->
+        <nav class="group-tabs" id="groupTabs" aria-label="提供商分组">
+            <button class="group-tab active" data-group="">全部</button>
+        </nav>
+
+        <section class="filters-section" aria-label="搜索与筛选">
             <div class="search-row">
-                <input type="text" id="searchInput" placeholder="Search by model name, provider, or tag..." aria-label="Search models">
-                <button id="searchBtn">Search</button>
+                <input type="text" id="searchInput" placeholder="搜索模型名 / 厂商 / 备注，例如 DeepSeek、推理、峰谷…" aria-label="搜索模型">
+                <button id="searchBtn">搜索</button>
             </div>
-            
+
             <div class="filter-row">
                 <div class="filter-group">
-                    <label for="providerFilter">Provider:</label>
-                    <select id="providerFilter">
-                        <option value="">All Providers</option>
+                    <label for="providerFilter">厂商：</label>
+                    <select id="providerFilter"><option value="">全部厂商</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="categoryFilter">分类：</label>
+                    <select id="categoryFilter"><option value="">全部分类</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="accessFilter">国内可达性：</label>
+                    <select id="accessFilter"><option value="">不限</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="sourceFilter">取数核验：</label>
+                    <select id="sourceFilter">
+                        <option value="">不限</option>
+                        <option value="dual">双源已交叉</option>
+                        <option value="single">仅单一来源</option>
+                        <option value="official">含厂商官方源</option>
                     </select>
                 </div>
-                
                 <div class="filter-group">
-                    <label for="modelTypeFilter">Model Type:</label>
-                    <select id="modelTypeFilter">
-                        <option value="">All Types</option>
-                        <option value="general">General</option>
-                        <option value="reasoning">Reasoning</option>
-                        <option value="code">Code</option>
-                        <option value="multimodal">Multimodal</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
-                    <label for="priceSort">Sort by Price:</label>
+                    <label for="priceSort">价格排序：</label>
                     <select id="priceSort">
-                        <option value="">Default</option>
-                        <option value="input-asc">Input Price (Low-High)</option>
-                        <option value="input-desc">Input Price (High-Low)</option>
-                        <option value="output-asc">Output Price (Low-High)</option>
-                        <option value="output-desc">Output Price (High-Low)</option>
+                        <option value="">默认（按分组）</option>
+                        <option value="input-asc">输入价（低→高）</option>
+                        <option value="input-desc">输入价（高→低）</option>
+                        <option value="output-asc">输出价（低→高）</option>
+                        <option value="output-desc">输出价（高→低）</option>
                     </select>
                 </div>
-                
                 <div class="filter-group">
-                    <label for="contextFilter">Min Context:</label>
-                    <select id="contextFilter">
-                        <option value="0">Any</option>
-                    </select>
+                    <label for="contextFilter">最小上下文：</label>
+                    <select id="contextFilter"><option value="0">不限</option></select>
                 </div>
             </div>
-            
+
             <div class="price-range-row">
                 <div class="filter-group">
-                    <label for="minInputPrice">Input $/M min:</label>
+                    <label for="minInputPrice">输入 ≤$/M 起：</label>
                     <input type="number" id="minInputPrice" step="0.01" min="0" placeholder="0">
                 </div>
                 <div class="filter-group">
-                    <label for="maxInputPrice">Input $/M max:</label>
+                    <label for="maxInputPrice">输入 ≤$/M 止：</label>
                     <input type="number" id="maxInputPrice" step="0.01" min="0" placeholder="∞">
                 </div>
                 <div class="filter-group">
-                    <label for="minOutputPrice">Output $/M min:</label>
+                    <label for="minOutputPrice">输出 ≤$/M 起：</label>
                     <input type="number" id="minOutputPrice" step="0.01" min="0" placeholder="0">
                 </div>
                 <div class="filter-group">
-                    <label for="maxOutputPrice">Output $/M max:</label>
+                    <label for="maxOutputPrice">输出 ≤$/M 止：</label>
                     <input type="number" id="maxOutputPrice" step="0.01" min="0" placeholder="∞">
                 </div>
+                <div class="filter-group checkbox">
+                    <label><input type="checkbox" id="peakOnly"> 只看有波峰波谷定价的模型</label>
+                </div>
+                <div class="filter-group checkbox">
+                    <label><input type="checkbox" id="cnyOnly"> 只看人民币计价</label>
+                </div>
             </div>
-            
+
             <div class="filter-row">
-                <button class="clear-filters" id="clearBtn">Clear Filters</button>
+                <button class="clear-filters" id="clearBtn">清空筛选</button>
+                <span class="result-count" id="resultCount"></span>
             </div>
         </section>
-        
-        <section class="models-grid" id="modelsGrid" aria-label="Model cards">
-            <!-- Models loaded dynamically -->
+
+        <section class="models-area" id="modelsArea" aria-label="模型卡片"></section>
+
+        <section class="stats-section" id="stats" aria-label="统计">
+            <div class="stat-card"><h3>模型总数</h3><p id="totalCount">0</p></div>
+            <div class="stat-card"><h3>厂商数</h3><p id="providerCount">0</p></div>
+            <div class="stat-card"><h3>双源交叉</h3><p id="dualCount">0</p></div>
+            <div class="stat-card"><h3>峰谷模型</h3><p id="peakCount">0</p></div>
         </section>
-        
-        <section class="stats-section" id="stats" aria-label="Statistics">
-            <div class="stat-card">
-                <h3>Total Models</h3>
-                <p id="totalCount">0</p>
+
+        <section class="panel-section" id="peakValleySection" aria-label="波峰波谷时段">
+            <h2>波峰波谷时段与折扣</h2>
+            <p class="panel-note">厂商 API 的峰/谷时段划分与谷时段折扣；未公开时段定价的厂商已如实标注为「未公开」，不做推算。</p>
+            <div class="pv-grid" id="pvGrid"></div>
+        </section>
+
+        <section class="panel-section" id="newsSection" aria-label="厂商最新新闻">
+            <h2>每个大模型厂商最新新闻</h2>
+            <p class="panel-note">国内可直连厂商取其官方 News/公告；国内访问不到的厂商改由可检索的模型资讯站与聚合目录取数，每条均标注来源与抓取日期。</p>
+            <div class="filter-row news-filter">
+                <div class="filter-group">
+                    <label for="newsProvider">厂商：</label>
+                    <select id="newsProvider"><option value="">全部厂商</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="newsSource">来源类型：</label>
+                    <select id="newsSource"><option value="">全部来源</option></select>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3>Providers</h3>
-                <p id="providerCount">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>Avg Input</h3>
-                <p id="avgInputPrice">$0</p>
-            </div>
+            <div class="news-grid" id="newsGrid"></div>
+        </section>
+
+        <section class="panel-section" id="healthSection" aria-label="取数健康与说明">
+            <h2>取数方法与来源健康</h2>
+            <details>
+                <summary>方法论（methodology）</summary>
+                <p id="methodology" class="panel-note"></p>
+            </details>
+            <details>
+                <summary>未能核验清单（unresolved）</summary>
+                <ul id="unresolvedList" class="issue-list"></ul>
+            </details>
+            <details>
+                <summary>已失效取数路径与替代路径（deprecated paths）</summary>
+                <ul id="deprecatedList" class="issue-list"></ul>
+            </details>
+            <details>
+                <summary>来源健康表（每次抓取的可达性实测）</summary>
+                <div class="table-wrap"><table class="health-table" id="healthTable">
+                    <thead><tr><th>状态</th><th>来源</th><th>类型</th><th>字节/条数</th><th>错误 / 备注</th></tr></thead>
+                    <tbody></tbody>
+                </table></div>
+            </details>
         </section>
     </main>
-    
+
     <footer>
-        <p>LLM Database Explorer &copy; 2026 | Data sourced from public pricing information</p>
+        <p>LLM Database Explorer © 2026 · 价格与参数来自厂商公开定价文档、聚合网关目录与模型资讯站，均逐条标注来源与抓取日期</p>
     </footer>
-    
+
     <script src="app.js"></script>
 </body>
 </html>
