@@ -45,3 +45,6 @@ registry/
 chains/
 ../../../../../
 workspaces/
+
+probe_result.json
+llm_pricing_data.json.bak
