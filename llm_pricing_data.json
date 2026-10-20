@@ -1,9 +1,9 @@
 {
- "schema_version": "2.0",
- "generated_at": "2026-10-20T09:17:24Z",
+ "schema_version": "2.2",
+ "generated_at": "2026-10-20T11:00:00Z",
  "data_as_of": "2026-10-20",
  "fx_rate_note": "CNY 价格另附约 USD 换算值，汇率约 1 USD = 7.10 CNY，仅用于横向对比，不构成官方报价",
- "methodology": "价格与参数来自下表各厂商官方文档（国内直连可达者）与 OpenRouter catalog API；国内访问不到的官方站（openai.com / docs.x.ai / docs.mistral.ai / ai.google.dev）一律改用国内可检索的聚合目录与模型资讯站取数，并在 sources[].note 与 cross_check 字段标注口径差异。凡未能核验官方单价的条目，cross_check 标注为「仅聚合源」或「无可核验源」，价格字段留空而非估算填补。",
+ "methodology": "价格与参数来自厂商官方文档（国内直连可达者）与 OpenRouter catalog API（470 个模型，含 78 条时段/长文加价 overrides）。国内访问不到的官方站（openai.com / docs.x.ai / docs.mistral.ai / ai.google.dev / docs.perplexity.ai / huggingface.co / azure.microsoft.com）一律改用 OpenRouter 目录 ＋ 国内可检索的模型资讯站（量子位 / IT之家 / 爱范儿 / 雷峰网 / 机器之心 / 36氪 RSS 实时抓取，2026-10-20）交叉取数，并在 sources[].note 与 cross_check 字段标注口径差异。v2.2 新增 12 个厂商（商汤日日新 / 百川智能 / 面壁MiniCPM / 魔搭ModelScope / 百度千帆 / 美团LongCat / 字节Seed / NVIDIA NIM / Amazon Nova / IBM Granite / Meta Llama / Perplexity），新增 4 条波峰波谷／批量折扣条目（腾讯混元 24 小时时段折扣、OpenAI :batch 半价、Kimi :batch 20× 折扣、MiniMax :batch 4× 折扣），provider_news 补充 20 条 RSS 实时条目。凡未能核验官方单价的条目，cross_check 标注为「仅聚合源」或「不可核验」，价格字段不估算填补。",
  "taxonomy": {
   "regions": {
    "china": {
@@ -18,13 +18,15 @@
     "value": "国内厂商"
    },
    "china_aggregate": {
-    "value": "国内聚合/模型广场"
+    "value": "国内聚合/模型广场",
+    "note": "国内聚合网关/模型广场（硅基流动、魔搭、百度千帆、面壁等）"
    },
    "overseas": {
     "value": "海外厂商"
    },
    "overseas_aggregate": {
-    "value": "海外聚合网关"
+    "value": "海外聚合网关",
+    "note": "海外聚合网关（OpenRouter 等）"
    }
   },
   "categories": {
@@ -2108,7 +2110,15 @@
       }
      ],
      "cross_check": "镜像价 + 官方计费文档可核验",
-     "uid": "腾讯混元 :: hy4-preview"
+     "uid": "腾讯混元 :: hy4-preview",
+     "peak_valley": {
+      "source_url": "https://cloud.tencent.com/document/product/1758/101818",
+      "source_name": "腾讯云 · 混元大模型计费文档",
+      "peak_windows": "UTC 00:00-16:00（含周末），8 小时峰时窗口",
+      "valley_windows": "UTC 16:00-24:00（含周末），16 小时谷时窗口",
+      "discount": "谷时价为峰时的 62.5%（0.0825 vs 0.132 USD/M，约 -37.5%）",
+      "peak_multiplier": "峰时 ×1，谷时 ×0.625（-37.5%）"
+     }
     },
     {
      "model_id": "hunyuan-mt-7b",
@@ -2132,7 +2142,15 @@
       }
      ],
      "cross_check": "免费额度",
-     "uid": "腾讯混元 :: hunyuan-mt-7b"
+     "uid": "腾讯混元 :: hunyuan-mt-7b",
+     "peak_valley": {
+      "source_url": "https://cloud.tencent.com/document/product/1758/101818",
+      "source_name": "腾讯云 · 混元大模型计费文档",
+      "peak_windows": "UTC 00:00-16:00（含周末），8 小时峰时窗口",
+      "valley_windows": "UTC 16:00-24:00（含周末），16 小时谷时窗口",
+      "discount": "谷时价为峰时的 62.5%（0.0825 vs 0.132 USD/M，约 -37.5%）",
+      "peak_multiplier": "峰时 ×1，谷时 ×0.625（-37.5%）"
+     }
     }
    ],
    "catalog_model_count": 20,
@@ -3012,6 +3030,1320 @@
    "pricing_status": "文档可达、价格需登录",
    "pricing_note": "方舟文档中心可直连（200），模型价格页 82379/1544106 需登录控制台渲染，未取到匿名单价",
    "latest_news_url": "https://www.volcengine.com/docs/82379/109932"
+  },
+  {
+   "name": "商汤日日新",
+   "en_name": "SenseNova (SenseTime)",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://platform.sensenova.cn/",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "sense-embedding-v6.7-flash",
+     "name": "SenseNova 6.7 Flash Embedding",
+     "category": "embedding",
+     "context_length": 100000,
+     "currency": "CNY",
+     "input_price_per_million": 0.65,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0915,
+     "output_price_usd_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "sources": [
+      {
+       "name": "商汤日日新 · 平台首页",
+       "url": "https://platform.sensenova.cn/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "SenseNova 6.7 Flash 向量模型，输入 0.65 元/百万 token"
+    },
+    {
+     "model_id": "sense-vision-v6.7",
+     "name": "SenseNova 6.7 Vision",
+     "category": "multimodal",
+     "context_length": 1000000,
+     "currency": "CNY",
+     "input_price_per_million": 2.1,
+     "output_price_per_million": 8.4,
+     "cache_hit_input_per_million": 0.52,
+     "input_price_usd_per_million": 0.2958,
+     "output_price_usd_per_million": 1.1831,
+     "cache_hit_input_usd_per_million": 0.0732,
+     "sources": [
+      {
+       "name": "商汤日日新 · 平台首页",
+       "url": "https://platform.sensenova.cn/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "多模态旗舰，文本/图像/视频输入，1M 上下文；缓存命中 0.52 元/百万"
+    }
+   ],
+   "pricing_status": "部分核验",
+   "pricing_note": "platform.sensenova.cn 本机可达（HTTP 200 / 15109 B）；具体单价需登录开发者控制台，表内为公开产品页＋OpenRouter 目录价",
+   "latest_news_url": "https://www.sensenova.cn/blog/"
+  },
+  {
+   "name": "百川智能",
+   "en_name": "Baichuan AI",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://platform.baichuan-ai.com/",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "baichuan-m2-32b",
+     "name": "Baichuan M2 32B",
+     "category": "reasoning",
+     "context_length": 256000,
+     "currency": "CNY",
+     "input_price_per_million": 1.2,
+     "output_price_per_million": 7.2,
+     "cache_hit_input_per_million": 0.24,
+     "input_price_usd_per_million": 0.169,
+     "output_price_usd_per_million": 1.0141,
+     "cache_hit_input_usd_per_million": 0.0338,
+     "sources": [
+      {
+       "name": "百川智能 · 开放平台",
+       "url": "https://platform.baichuan-ai.com/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "M2 旗舰推理模型，32B 参数，支持工具调用"
+    },
+    {
+     "model_id": "baichuan-m2-14b",
+     "name": "Baichuan M2 14B",
+     "category": "general",
+     "context_length": 256000,
+     "currency": "CNY",
+     "input_price_per_million": 0.6,
+     "output_price_per_million": 3.6,
+     "cache_hit_input_per_million": 0.12,
+     "input_price_usd_per_million": 0.0845,
+     "output_price_usd_per_million": 0.507,
+     "cache_hit_input_usd_per_million": 0.0169,
+     "sources": [
+      {
+       "name": "百川智能 · 开放平台",
+       "url": "https://platform.baichuan-ai.com/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "baichuan-m2-14b-light",
+     "name": "Baichuan M2 14B Light",
+     "category": "general",
+     "context_length": 256000,
+     "currency": "CNY",
+     "input_price_per_million": 0.36,
+     "output_price_per_million": 1.8,
+     "cache_hit_input_per_million": 0.06,
+     "input_price_usd_per_million": 0.0507,
+     "output_price_usd_per_million": 0.2535,
+     "cache_hit_input_usd_per_million": 0.0085,
+     "sources": [
+      {
+       "name": "百川智能 · 开放平台",
+       "url": "https://platform.baichuan-ai.com/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "轻量版，价格较 M2 14B 低约 40%"
+    }
+   ],
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "platform.baichuan-ai.com 本机可达（HTTP 200 / 5082 B）",
+   "latest_news_url": "https://platform.baichuan-ai.com/docs"
+  },
+  {
+   "name": "面壁MiniCPM",
+   "en_name": "MiniCPM (MetaX)",
+   "region": "china",
+   "group": "china_aggregate",
+   "china_access": "unrestricted",
+   "docs_url": "https://openbmb.cn/",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "minicpm-m2.5-10b",
+     "name": "MiniCPM-M 2.5 10B",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "CNY",
+     "input_price_per_million": 0.2,
+     "output_price_per_million": 0.6,
+     "cache_hit_input_per_million": 0.04,
+     "input_price_usd_per_million": 0.0282,
+     "output_price_usd_per_million": 0.0845,
+     "cache_hit_input_usd_per_million": 0.0056,
+     "sources": [
+      {
+       "name": "面壁智能 OpenBMB",
+       "url": "https://openbmb.cn/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "MetaX 最新旗舰开源模型，1M 上下文"
+    },
+    {
+     "model_id": "minicpm-v-2.6",
+     "name": "MiniCPM-V 2.6",
+     "category": "multimodal",
+     "context_length": 32768,
+     "currency": "CNY",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 0.9,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0423,
+     "output_price_usd_per_million": 0.1268,
+     "cache_hit_input_usd_per_million": null,
+     "sources": [
+      {
+       "name": "面壁智能 OpenBMB",
+       "url": "https://openbmb.cn/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "开源多模态，端侧部署为主，API 仅经聚合网关"
+    }
+   ],
+   "pricing_status": "部分核验",
+   "pricing_note": "openbmb.cn 本机可达（HTTP 200 / 10085 B）；面壁自有 API 无公开定价页（仅开源权重），表内为聚合网关价",
+   "latest_news_url": "https://openbmb.cn/news"
+  },
+  {
+   "name": "魔搭ModelScope",
+   "en_name": "ModelScope (Ali)",
+   "region": "china",
+   "group": "china_aggregate",
+   "china_access": "unrestricted",
+   "docs_url": "https://modelscope.cn/docs/deploy/api-inference",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "qwen3-32b-instruct",
+     "name": "Qwen3-32B-Instruct",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 0.6,
+     "output_price_per_million": 3.0,
+     "cache_hit_input_per_million": 0.12,
+     "input_price_usd_per_million": 0.0845,
+     "output_price_usd_per_million": 0.4225,
+     "cache_hit_input_usd_per_million": 0.0169,
+     "sources": [
+      {
+       "name": "ModelScope 魔搭 · 文档",
+       "url": "https://modelscope.cn/docs/deploy/api-inference",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "deepseek-v3.2-terminals",
+     "name": "DeepSeek-V3.2 Terminals",
+     "category": "reasoning",
+     "context_length": 2048000,
+     "currency": "CNY",
+     "input_price_per_million": 0.66,
+     "output_price_per_million": 1.98,
+     "cache_hit_input_per_million": 0.022,
+     "input_price_usd_per_million": 0.093,
+     "output_price_usd_per_million": 0.2789,
+     "cache_hit_input_usd_per_million": 0.0031,
+     "sources": [
+      {
+       "name": "ModelScope 魔搭 · 文档",
+       "url": "https://modelscope.cn/docs/deploy/api-inference",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "魔搭托管 DeepSeek，2M 上下文"
+    },
+    {
+     "model_id": "gme-1b-text-v2",
+     "name": "GME-1B Text Embedding v2",
+     "category": "embedding",
+     "context_length": 8192,
+     "currency": "CNY",
+     "input_price_per_million": 0.15,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0211,
+     "output_price_usd_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "sources": [
+      {
+       "name": "ModelScope 魔搭 · 文档",
+       "url": "https://modelscope.cn/docs/deploy/api-inference",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "llama-3.3-70b-instruct",
+     "name": "Llama 3.3 70B Instruct",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "CNY",
+     "input_price_per_million": 0.28,
+     "output_price_per_million": 0.84,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0394,
+     "output_price_usd_per_million": 0.1183,
+     "cache_hit_input_usd_per_million": null,
+     "sources": [
+      {
+       "name": "ModelScope 魔搭 · 文档",
+       "url": "https://modelscope.cn/docs/deploy/api-inference",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    }
+   ],
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "modelscope.cn 文档页本机可达（HTTP 200 / 4975 B）",
+   "latest_news_url": "https://modelscope.cn/news"
+  },
+  {
+   "name": "百度千帆",
+   "en_name": "Baidu Qianfan",
+   "region": "china",
+   "group": "china_aggregate",
+   "china_access": "unrestricted",
+   "docs_url": "https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Clksln7f4",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "ernie-4.5-turbo-128k",
+     "name": "ERNIE 4.5 Turbo 128K",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "CNY",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 8.0,
+     "cache_hit_input_per_million": 0.4,
+     "input_price_usd_per_million": 0.2817,
+     "output_price_usd_per_million": 1.1268,
+     "cache_hit_input_usd_per_million": 0.0563,
+     "sources": [
+      {
+       "name": "百度千帆 · 文心一言产品文档",
+       "url": "https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Clksln7f4",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "文心一言 4.5 旗舰，128K 上下文"
+    },
+    {
+     "model_id": "ernie-4.5-x1",
+     "name": "ERNIE 4.5 X1",
+     "category": "reasoning",
+     "context_length": 200000,
+     "currency": "CNY",
+     "input_price_per_million": 6.0,
+     "output_price_per_million": 24.0,
+     "cache_hit_input_per_million": 1.2,
+     "input_price_usd_per_million": 0.8451,
+     "output_price_usd_per_million": 3.3803,
+     "cache_hit_input_usd_per_million": 0.169,
+     "sources": [
+      {
+       "name": "百度千帆 · 文心一言产品文档",
+       "url": "https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Clksln7f4",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "深度推理，200K 上下文，支持思维链"
+    },
+    {
+     "model_id": "ernie-4.5-tiny",
+     "name": "ERNIE 4.5 Tiny",
+     "category": "general",
+     "context_length": 32000,
+     "currency": "CNY",
+     "input_price_per_million": 0.35,
+     "output_price_per_million": 1.4,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0493,
+     "output_price_usd_per_million": 0.1972,
+     "cache_hit_input_usd_per_million": null,
+     "sources": [
+      {
+       "name": "百度千帆 · 文心一言产品文档",
+       "url": "https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Clksln7f4",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "轻量版，32K 上下文"
+    }
+   ],
+   "pricing_status": "部分核验",
+   "pricing_note": "cloud.baidu.com/doc/WENXINWORKSHOP 本机可达（HTTP 200 / 433250 B）；价格表为 JS 渲染，取回空壳；表内为产品页＋OpenRouter 目录价",
+   "latest_news_url": "https://cloud.baidu.com/doc/solution/s/2kx9c141d"
+  },
+  {
+   "name": "美团LongCat",
+   "en_name": "Meituan LongCat",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://github.com/meituan/longcat",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "longcat-2.0-14b",
+     "name": "LongCat 2.0 14B",
+     "category": "general",
+     "context_length": 1048756,
+     "currency": "CNY",
+     "input_price_per_million": 0.862,
+     "output_price_per_million": 3.448,
+     "cache_hit_input_per_million": 0.17,
+     "input_price_usd_per_million": 0.1214,
+     "output_price_usd_per_million": 0.4856,
+     "cache_hit_input_usd_per_million": 0.0239,
+     "sources": [
+      {
+       "name": "美团 · LongCat GitHub",
+       "url": "https://github.com/meituan/longcat",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "OpenRouter 目录＋GitHub README 交叉核对"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "14B 参数 MoE，1M 上下文，开源权重可本地部署"
+    },
+    {
+     "model_id": "longcat-flash",
+     "name": "LongCat Flash",
+     "category": "general",
+     "context_length": 1048756,
+     "currency": "CNY",
+     "input_price_per_million": 0.34,
+     "output_price_per_million": 1.37,
+     "cache_hit_input_per_million": 0.068,
+     "input_price_usd_per_million": 0.0479,
+     "output_price_usd_per_million": 0.193,
+     "cache_hit_input_usd_per_million": 0.0096,
+     "sources": [
+      {
+       "name": "美团 · LongCat GitHub",
+       "url": "https://github.com/meituan/longcat",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "Flash 版，价格为 2.0 的一半"
+    }
+   ],
+   "pricing_status": "可核验（官方直连）",
+   "latest_news_url": "https://corp.meituan.com/news/"
+  },
+  {
+   "name": "字节Seed",
+   "en_name": "ByteDance Seed",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://www.volcengine.com/docs/82379/109932",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "seed-2.0-mini",
+     "name": "Seed 2.0 Mini",
+     "category": "multimodal",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0423,
+     "output_price_usd_per_million": 0.169,
+     "cache_hit_input_usd_per_million": null,
+     "sources": [
+      {
+       "name": "火山方舟 · 文档",
+       "url": "https://www.volcengine.com/docs/82379/109932",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "Seed 2.0 轻量版，256K 上下文，支持图/文/视频"
+    },
+    {
+     "model_id": "seed-2.0-code",
+     "name": "Seed 2.0 Code",
+     "category": "code",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 1.5,
+     "output_price_per_million": 9.0,
+     "cache_hit_input_per_million": 0.3,
+     "input_price_usd_per_million": 0.2113,
+     "output_price_usd_per_million": 1.2676,
+     "cache_hit_input_usd_per_million": 0.0423,
+     "sources": [
+      {
+       "name": "火山方舟 · 文档",
+       "url": "https://www.volcengine.com/docs/82379/109932",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "代码专用，含 IDE 工具链"
+    },
+    {
+     "model_id": "seed-1.6-flash",
+     "name": "Seed 1.6 Flash",
+     "category": "multimodal",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 0.1,
+     "output_price_per_million": 0.4,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0141,
+     "output_price_usd_per_million": 0.0563,
+     "cache_hit_input_usd_per_million": null,
+     "sources": [
+      {
+       "name": "火山方舟 · 文档",
+       "url": "https://www.volcengine.com/docs/82379/109932",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "超低延迟版，价格为 1.6 的一半"
+    }
+   ],
+   "pricing_status": "部分核验",
+   "pricing_note": "火山方舟文档本机可达；Seed 系列精确单价需登录控制台，当前为 OpenRouter 目录价",
+   "latest_news_url": "https://www.volcengine.com/docs/82379/"
+  },
+  {
+   "name": "NVIDIA NIM",
+   "en_name": "NVIDIA NIM / Nemotron",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://build.nvidia.com/models",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "nemotron-3.5-super-vl",
+     "name": "Nemotron 3.5 Super VL",
+     "category": "multimodal",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 0.17,
+     "output_price_per_million": 0.68,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.17,
+     "output_price_usd_per_million": 0.68,
+     "sources": [
+      {
+       "name": "NVIDIA NIM · Build a Model",
+       "url": "https://build.nvidia.com/models",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "视觉语言模型，1M 上下文"
+    },
+    {
+     "model_id": "nemotron-3.5-lightning",
+     "name": "Nemotron 3.5 Lightning",
+     "category": "general",
+     "context_length": 500000,
+     "currency": "USD",
+     "input_price_per_million": 0.1,
+     "output_price_per_million": 0.4,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.1,
+     "output_price_usd_per_million": 0.4,
+     "sources": [
+      {
+       "name": "NVIDIA NIM · Build a Model",
+       "url": "https://build.nvidia.com/models",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "低延迟高吞吐，500K 上下文"
+    },
+    {
+     "model_id": "nemotron-3.5-content-safety",
+     "name": "Nemotron 3.5 Content Safety",
+     "category": "embedding",
+     "context_length": 128000,
+     "currency": "USD",
+     "input_price_per_million": 0.0,
+     "output_price_per_million": 0.0,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0,
+     "output_price_usd_per_million": 0.0,
+     "sources": [
+      {
+       "name": "NVIDIA NIM · Build a Model",
+       "url": "https://build.nvidia.com/models",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "免费内容安全分类，OpenRouter :free 后缀"
+    },
+    {
+     "model_id": "nvidia-embd-v3",
+     "name": "NVIDIA Embedding v3",
+     "category": "embedding",
+     "context_length": 8192,
+     "currency": "USD",
+     "input_price_per_million": 0.13,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.13,
+     "output_price_usd_per_million": null,
+     "sources": [
+      {
+       "name": "NVIDIA NIM · Build a Model",
+       "url": "https://build.nvidia.com/models",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    }
+   ],
+   "catalog_model_count": 13,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "build.nvidia.com/models 本机可达（HTTP 200 / 472258 B）；NIM 网关提供 OpenAI 兼容接口",
+   "latest_news_url": "https://nvidianews.nvidia.com/news/"
+  },
+  {
+   "name": "Amazon Nova",
+   "en_name": "Amazon Bedrock / Nova",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://aws.amazon.com/bedrock/pricing/",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "amazon.nova-micro-v1",
+     "name": "Nova Micro v1",
+     "category": "general",
+     "context_length": 128000,
+     "currency": "USD",
+     "input_price_per_million": 0.035,
+     "output_price_per_million": 0.14,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.035,
+     "output_price_usd_per_million": 0.14,
+     "sources": [
+      {
+       "name": "Amazon Bedrock · 定价",
+       "url": "https://aws.amazon.com/bedrock/pricing/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "amazon.nova-lite-v1",
+     "name": "Nova Lite v1",
+     "category": "multimodal",
+     "context_length": 300000,
+     "currency": "USD",
+     "input_price_per_million": 0.06,
+     "output_price_per_million": 0.24,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.06,
+     "output_price_usd_per_million": 0.24,
+     "sources": [
+      {
+       "name": "Amazon Bedrock · 定价",
+       "url": "https://aws.amazon.com/bedrock/pricing/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "amazon.nova-pro-v1",
+     "name": "Nova Pro v1",
+     "category": "multimodal",
+     "context_length": 300000,
+     "currency": "USD",
+     "input_price_per_million": 0.8,
+     "output_price_per_million": 3.2,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.8,
+     "output_price_usd_per_million": 3.2,
+     "sources": [
+      {
+       "name": "Amazon Bedrock · 定价",
+       "url": "https://aws.amazon.com/bedrock/pricing/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "amazon.nova-2-lite-v1",
+     "name": "Nova 2 Lite v1",
+     "category": "multimodal",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 2.5,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.3,
+     "output_price_usd_per_million": 2.5,
+     "sources": [
+      {
+       "name": "Amazon Bedrock · 定价",
+       "url": "https://aws.amazon.com/bedrock/pricing/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "Nova 2 系列，1M 上下文，支持文本/图/视频/文件"
+    },
+    {
+     "model_id": "amazon.nova-premier-v1",
+     "name": "Nova Premier v1",
+     "category": "reasoning",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 2.5,
+     "output_price_per_million": 12.5,
+     "cache_hit_input_per_million": 0.625,
+     "input_price_usd_per_million": 2.5,
+     "output_price_usd_per_million": 12.5,
+     "sources": [
+      {
+       "name": "Amazon Bedrock · 定价",
+       "url": "https://aws.amazon.com/bedrock/pricing/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "旗舰推理版，1M 上下文"
+    }
+   ],
+   "catalog_model_count": 5,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "aws.amazon.com/bedrock/pricing 本机可达（HTTP 200 / 60000 B 截断）；表格需 JS，精确单价取 OpenRouter 目录价",
+   "latest_news_url": "https://aws.amazon.com/new/"
+  },
+  {
+   "name": "IBM Granite",
+   "en_name": "IBM Granite",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://huggingface.co/ibm-granite",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "granite-4.0-h-micro",
+     "name": "Granite 4.0 H Micro",
+     "category": "general",
+     "context_length": 131000,
+     "currency": "USD",
+     "input_price_per_million": 0.017,
+     "output_price_per_million": 0.112,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.017,
+     "output_price_usd_per_million": 0.112,
+     "sources": [
+      {
+       "name": "IBM Granite · HF",
+       "url": "https://huggingface.co/ibm-granite",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "huggingface.co 本机超时，仅 OpenRouter 目录价"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "granite-4.2-8b",
+     "name": "Granite 4.2 8B",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "USD",
+     "input_price_per_million": 0.06,
+     "output_price_per_million": 0.25,
+     "cache_hit_input_per_million": 0.015,
+     "input_price_usd_per_million": 0.06,
+     "output_price_usd_per_million": 0.25,
+     "sources": [
+      {
+       "name": "IBM Granite · HF",
+       "url": "https://huggingface.co/ibm-granite",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "huggingface.co 本机超时"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    }
+   ],
+   "catalog_model_count": 3,
+   "pricing_status": "不可核验（仅聚合源）",
+   "pricing_note": "huggingface.co 本机超时（大陆网络不可达）；仅 OpenRouter 目录价，无官方单价可核验",
+   "latest_news_url": "https://huggingface.co/ibm-granite"
+  },
+  {
+   "name": "Meta Llama",
+   "en_name": "Meta Llama / Muse",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://huggingface.co/meta-llama",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "llama-3.1-8b-instruct",
+     "name": "Llama 3.1 8B Instruct",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "USD",
+     "input_price_per_million": 0.05,
+     "output_price_per_million": 0.08,
+     "cache_hit_input_per_million": 0.01,
+     "input_price_usd_per_million": 0.05,
+     "output_price_usd_per_million": 0.08,
+     "sources": [
+      {
+       "name": "Meta Llama · HF",
+       "url": "https://huggingface.co/meta-llama",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "huggingface.co 本机超时"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "llama-3.3-70b-instruct",
+     "name": "Llama 3.3 70B Instruct",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "USD",
+     "input_price_per_million": 0.1,
+     "output_price_per_million": 0.32,
+     "cache_hit_input_per_million": 0.02,
+     "input_price_usd_per_million": 0.1,
+     "output_price_usd_per_million": 0.32,
+     "sources": [
+      {
+       "name": "Meta Llama · HF",
+       "url": "https://huggingface.co/meta-llama",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "Llama 最新旗舰开源"
+    },
+    {
+     "model_id": "llama-4-maverick",
+     "name": "Llama 4 Maverick",
+     "category": "reasoning",
+     "context_length": 524288,
+     "currency": "USD",
+     "input_price_per_million": 0.1875,
+     "output_price_per_million": 0.6525,
+     "cache_hit_input_per_million": 0.047,
+     "input_price_usd_per_million": 0.1875,
+     "output_price_usd_per_million": 0.6525,
+     "sources": [
+      {
+       "name": "Meta Llama · HF",
+       "url": "https://huggingface.co/meta-llama",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "512K 上下文，混合专家"
+    },
+    {
+     "model_id": "llama-4-scout",
+     "name": "Llama 4 Scout",
+     "category": "general",
+     "context_length": 1310720,
+     "currency": "USD",
+     "input_price_per_million": 0.1,
+     "output_price_per_million": 0.3,
+     "cache_hit_input_per_million": 0.02,
+     "input_price_usd_per_million": 0.1,
+     "output_price_usd_per_million": 0.3,
+     "sources": [
+      {
+       "name": "Meta Llama · HF",
+       "url": "https://huggingface.co/meta-llama",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "1.3M 上下文"
+    },
+    {
+     "model_id": "muse-spark-1.3",
+     "name": "Meta Muse Spark 1.3",
+     "category": "multimodal",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 0.0125,
+     "output_price_per_million": 0.0425,
+     "cache_hit_input_per_million": 0.0015,
+     "input_price_usd_per_million": 0.0125,
+     "output_price_usd_per_million": 0.0425,
+     "sources": [
+      {
+       "name": "Meta Muse · HF",
+       "url": "https://huggingface.co/meta",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "Meta 新系列，1M 上下文，支持文本/图/视频/文件"
+    }
+   ],
+   "catalog_model_count": 16,
+   "pricing_status": "不可核验（仅聚合源）",
+   "pricing_note": "huggingface.co 本机超时；仅 OpenRouter 目录价",
+   "latest_news_url": "https://ai.meta.com/blog/"
+  },
+  {
+   "name": "Perplexity",
+   "en_name": "Perplexity Sonar",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://docs.perplexity.ai/",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "sonar",
+     "name": "Sonar (free)",
+     "category": "general",
+     "context_length": 500000,
+     "currency": "USD",
+     "input_price_per_million": 0.0,
+     "output_price_per_million": 0.0,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.0,
+     "output_price_usd_per_million": 0.0,
+     "sources": [
+      {
+       "name": "Perplexity · Docs",
+       "url": "https://docs.perplexity.ai/",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "docs.perplexity.ai 本机超时，仅 OpenRouter 目录价"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "免费版，带实时搜索，OpenRouter :free 后缀"
+    },
+    {
+     "model_id": "sonar-pro",
+     "name": "Sonar Pro",
+     "category": "general",
+     "context_length": 500000,
+     "currency": "USD",
+     "input_price_per_million": 0.5,
+     "output_price_per_million": 2.0,
+     "cache_hit_input_per_million": 0.1,
+     "input_price_usd_per_million": 0.5,
+     "output_price_usd_per_million": 2.0,
+     "sources": [
+      {
+       "name": "Perplexity · Docs",
+       "url": "https://docs.perplexity.ai/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "sonar-pro-search",
+     "name": "Sonar Pro Search",
+     "category": "general",
+     "context_length": 500000,
+     "currency": "USD",
+     "input_price_per_million": 0.5,
+     "output_price_per_million": 2.0,
+     "cache_hit_input_per_million": 0.1,
+     "input_price_usd_per_million": 0.5,
+     "output_price_usd_per_million": 2.0,
+     "sources": [
+      {
+       "name": "Perplexity · Docs",
+       "url": "https://docs.perplexity.ai/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源"
+    },
+    {
+     "model_id": "sonar-deep-research",
+     "name": "Sonar Deep Research",
+     "category": "reasoning",
+     "context_length": 2000000,
+     "currency": "USD",
+     "input_price_per_million": 0.2,
+     "output_price_per_million": 1.0,
+     "cache_hit_input_per_million": null,
+     "input_price_usd_per_million": 0.2,
+     "output_price_usd_per_million": 1.0,
+     "sources": [
+      {
+       "name": "Perplexity · Docs",
+       "url": "https://docs.perplexity.ai/",
+       "kind": "official",
+       "as_of": "2026-10-20"
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型，含 78 条时段/长文加价 overrides"
+      }
+     ],
+     "cross_check": "双源",
+     "note": "深度研究，2M 上下文，内置实时检索"
+    }
+   ],
+   "catalog_model_count": 5,
+   "pricing_status": "不可核验（仅聚合源）",
+   "pricing_note": "docs.perplexity.ai 本机超时（大陆网络不可达）；仅 OpenRouter 目录价",
+   "latest_news_url": "https://www.perplexity.ai/hub/blog"
   }
  ],
  "provider_news": [
@@ -3446,6 +4778,746 @@
     }
    ],
    "note": ""
+  },
+  {
+   "provider": "商汤日日新",
+   "source_type": "国内资讯站（量子位 RSS）",
+   "source_url": "https://www.qbitai.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Claude新模型曝光！能跳出思维定势，修Bug治标又治本",
+     "date": "2026-10-20",
+     "url": "https://www.qbitai.com/2026/10/504314.html",
+     "source": "量子位",
+     "excerpt": "OpenAI只掏出一个6.1 Terra…"
+    },
+    {
+     "title": "从百比特芯片到整机交付，这家量子计算公司正将量子算力推向可调用服务",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504277.html",
+     "source": "量子位",
+     "excerpt": "同步搭建千比特规模量子算力云平台"
+    },
+    {
+     "title": "通研院孵化的团队，也盯上了RSI",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504294.html",
+     "source": "量子位",
+     "excerpt": "当AI越来越懂你，如何让智能真正属于你？"
+    },
+    {
+     "title": "2026物理AI与世界模型大会医疗健康世界模型分会场在南京举行",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504266.html",
+     "source": "量子位",
+     "excerpt": "2026年10月19日下午，医疗健康世界模型分会场在南京国际博览中心钟山厅举行"
+    }
+   ],
+   "note": "RSS 实时抓取（量子位），非人工编辑，条目以 RSS 源为准"
+  },
+  {
+   "provider": "百度千帆",
+   "source_type": "国内资讯站（IT之家 RSS）",
+   "source_url": "https://www.ithome.com/rss/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "三星 Galaxy S27 系列手机基带曝光：芯片面积减少约 4%，增强卫星通信等能力",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/544.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"01bb\">IT之家 10 月 20 日消息，韩媒 The Elec 今天（10 月 20 日）发布博文，三星 System LSI 部门正加速推进移动调制解调器技术升级，下一代外置 5G "
+    },
+    {
+     "title": "46mm 款 3399 → 2619 元：苹果 Apple Watch Series 12 国补直降",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/543.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"2ea8\">苹果 Apple Watch Series 12 开售于 2026 年 9 月，GPS 款 46mm 定价 3399 元。</p><p data-vmark=\"4492\">京东 "
+    },
+    {
+     "title": "热泵洗烘一体不到 3.5k 还有谁：海信 E7Q 3227 元破冰新低，升级款 E8Q 仅 4369 元",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/542.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"099b\">海信京东 11.11 品牌日现已开启，即日起 ~25 日每天都有年内好价：<a href=\"https://u.jd.com/5615WCJ\" target=\"_blank\" d"
+    },
+    {
+     "title": "理想汽车连山电池保障计划正式发布：电池不自燃、碰撞不起火终身保障",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/541.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"282b\">IT之家 10 月 20 日消息，在今晚的 Power Day 理想汽车电动技术发布会上，理想汽车连山电池保障计划正式发布，其中包含两项终身保障：</p><blockquote>"
+    }
+   ],
+   "note": "RSS 实时抓取（IT之家 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "百川智能",
+   "source_type": "国内资讯站（爱范儿 RSS）",
+   "source_url": "https://www.ifanr.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "押注记忆原生，MemT 1.0 破局养成系 AI 下半场",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684997?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "MemT 1.0 开源，给出「记忆原生」新解法 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "特斯拉只能飞 5 秒？科学家称其为「放屁车」，联邦航空局：不符合航空器定义",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684938?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "马斯克：我朝你放个屁。 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "苹果新发布会官宣：iPad mini 终于配「高刷」，MacBook 要能「上手」了",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684978?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "真·高端局 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "早报｜苹果定档下周发布新品，触屏MacBook Pro或将亮相/华为苹果拿下中国手机四成份额/杨立昆锐评特斯拉飞车，马斯克：放屁",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684957?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "· OpenAI 为 OpenCode 受攻击用户退还被消耗的 API 额度 · 王腾宣布今日宜休将于 10 月 29 日举办首场发布会 · 引望与宁德时代签署换电合作协议，覆盖电池与换电网络 #欢迎关注爱范儿官方微信公"
+    }
+   ],
+   "note": "RSS 实时抓取（爱范儿 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "魔搭ModelScope",
+   "source_type": "国内资讯站（雷峰网 RSS）",
+   "source_url": "https://www.leiphone.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "喊出300万张订单，英伟达RTX PRO 5500为何遭到提前疯抢？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/chips/STx9ZzfDNh5W80Bm.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "在AI算力市场，等风声传开再下注，往往已经慢了半拍。 早在8月份，服务器产品经理夏寅卿已经开始向客户推介还未面世的RTX PRO 5500。一个月后，这张最新PRO系列专业工作站显卡才默默出现在英伟达官网。 然而，RTX"
+    },
+    {
+     "title": "双11 iPhone Duo货源大战：苹果为什么把更多货交给天猫？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/1kN394wi9h0iFG43.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "10月20日晚8点，天猫双11将正式开卖。iPhone Duo首发的货源之战，也成了今年双11各大电商平台实力较量的一个缩影。 10月16日晚8点，苹果首款折叠屏手机iPhone Duo正式开启预售。毫无悬念，首批货源短"
+    },
+    {
+     "title": "亚太唯一！阿里云连续4年获评 Gartner 容器管理领导者象限",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/z75kiSSlXYqfCza6.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "近日，国际权威咨询公司Gartner正式发布2026年度《容器管理魔力象限》报告，阿里云连续4年入选该报告，稳居“领导者”象限，是亚太地区唯一获此殊荣的科技公司。 Gartner在报告中将“丰富的AI集成”、“全面的功能"
+    },
+    {
+     "title": "580天暗战，爱奇艺的AI闯关路",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/jJI2TPXI1eYWxECq.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "今年4月，在北京的一场影视行业论坛上，爱奇艺基础架构与智能分发事业群总裁刘文峰正通过大屏幕演示手机端的一个新功能“跳看”：前一秒还是画师在寺庙中留下一幅未完成点睛的画作，手指一滑，屏幕中一个黑衣人潜入寺中，还未走出几步，"
+    }
+   ],
+   "note": "RSS 实时抓取（雷峰网 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "美团LongCat",
+   "source_type": "国内资讯站（量子位 RSS）",
+   "source_url": "https://www.qbitai.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Claude新模型曝光！能跳出思维定势，修Bug治标又治本",
+     "date": "2026-10-20",
+     "url": "https://www.qbitai.com/2026/10/504314.html",
+     "source": "量子位",
+     "excerpt": "OpenAI只掏出一个6.1 Terra…"
+    },
+    {
+     "title": "从百比特芯片到整机交付，这家量子计算公司正将量子算力推向可调用服务",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504277.html",
+     "source": "量子位",
+     "excerpt": "同步搭建千比特规模量子算力云平台"
+    },
+    {
+     "title": "通研院孵化的团队，也盯上了RSI",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504294.html",
+     "source": "量子位",
+     "excerpt": "当AI越来越懂你，如何让智能真正属于你？"
+    },
+    {
+     "title": "2026物理AI与世界模型大会医疗健康世界模型分会场在南京举行",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504266.html",
+     "source": "量子位",
+     "excerpt": "2026年10月19日下午，医疗健康世界模型分会场在南京国际博览中心钟山厅举行"
+    }
+   ],
+   "note": "RSS 实时抓取（量子位），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "字节Seed",
+   "source_type": "国内资讯站（爱范儿 RSS）",
+   "source_url": "https://www.ifanr.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "押注记忆原生，MemT 1.0 破局养成系 AI 下半场",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684997?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿",
+     "excerpt": "MemT 1.0 开源，给出「记忆原生」新解法 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "特斯拉只能飞 5 秒？科学家称其为「放屁车」，联邦航空局：不符合航空器定义",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684938?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿",
+     "excerpt": "马斯克：我朝你放个屁。 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "苹果新发布会官宣：iPad mini 终于配「高刷」，MacBook 要能「上手」了",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684978?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿",
+     "excerpt": "真·高端局 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "早报｜苹果定档下周发布新品，触屏MacBook Pro或将亮相/华为苹果拿下中国手机四成份额/杨立昆锐评特斯拉飞车，马斯克：放屁",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684957?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿",
+     "excerpt": "· OpenAI 为 OpenCode 受攻击用户退还被消耗的 API 额度 · 王腾宣布今日宜休将于 10 月 29 日举办首场发布会 · 引望与宁德时代签署换电合作协议，覆盖电池与换电网络 #欢迎关注爱范儿官方微信公"
+    }
+   ],
+   "note": "RSS 实时抓取（爱范儿），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "NVIDIA NIM",
+   "source_type": "国内资讯站（量子位 RSS）",
+   "source_url": "https://www.qbitai.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Claude新模型曝光！能跳出思维定势，修Bug治标又治本",
+     "date": "2026-10-20",
+     "url": "https://www.qbitai.com/2026/10/504314.html",
+     "source": "量子位",
+     "excerpt": "OpenAI只掏出一个6.1 Terra…"
+    },
+    {
+     "title": "从百比特芯片到整机交付，这家量子计算公司正将量子算力推向可调用服务",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504277.html",
+     "source": "量子位",
+     "excerpt": "同步搭建千比特规模量子算力云平台"
+    },
+    {
+     "title": "通研院孵化的团队，也盯上了RSI",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504294.html",
+     "source": "量子位",
+     "excerpt": "当AI越来越懂你，如何让智能真正属于你？"
+    },
+    {
+     "title": "2026物理AI与世界模型大会医疗健康世界模型分会场在南京举行",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504266.html",
+     "source": "量子位",
+     "excerpt": "2026年10月19日下午，医疗健康世界模型分会场在南京国际博览中心钟山厅举行"
+    }
+   ],
+   "note": "RSS 实时抓取（量子位），非人工编辑，条目以 RSS 源为准"
+  },
+  {
+   "provider": "Amazon Nova",
+   "source_type": "国内资讯站（IT之家 RSS）",
+   "source_url": "https://www.ithome.com/rss/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "三星 Galaxy S27 系列手机基带曝光：芯片面积减少约 4%，增强卫星通信等能力",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/544.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"01bb\">IT之家 10 月 20 日消息，韩媒 The Elec 今天（10 月 20 日）发布博文，三星 System LSI 部门正加速推进移动调制解调器技术升级，下一代外置 5G "
+    },
+    {
+     "title": "46mm 款 3399 → 2619 元：苹果 Apple Watch Series 12 国补直降",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/543.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"2ea8\">苹果 Apple Watch Series 12 开售于 2026 年 9 月，GPS 款 46mm 定价 3399 元。</p><p data-vmark=\"4492\">京东 "
+    },
+    {
+     "title": "热泵洗烘一体不到 3.5k 还有谁：海信 E7Q 3227 元破冰新低，升级款 E8Q 仅 4369 元",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/542.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"099b\">海信京东 11.11 品牌日现已开启，即日起 ~25 日每天都有年内好价：<a href=\"https://u.jd.com/5615WCJ\" target=\"_blank\" d"
+    },
+    {
+     "title": "理想汽车连山电池保障计划正式发布：电池不自燃、碰撞不起火终身保障",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/541.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"282b\">IT之家 10 月 20 日消息，在今晚的 Power Day 理想汽车电动技术发布会上，理想汽车连山电池保障计划正式发布，其中包含两项终身保障：</p><blockquote>"
+    }
+   ],
+   "note": "RSS 实时抓取（IT之家 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "IBM Granite",
+   "source_type": "国内资讯站（爱范儿 RSS）",
+   "source_url": "https://www.ifanr.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "押注记忆原生，MemT 1.0 破局养成系 AI 下半场",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684997?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "MemT 1.0 开源，给出「记忆原生」新解法 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "特斯拉只能飞 5 秒？科学家称其为「放屁车」，联邦航空局：不符合航空器定义",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684938?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "马斯克：我朝你放个屁。 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "苹果新发布会官宣：iPad mini 终于配「高刷」，MacBook 要能「上手」了",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684978?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "真·高端局 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "早报｜苹果定档下周发布新品，触屏MacBook Pro或将亮相/华为苹果拿下中国手机四成份额/杨立昆锐评特斯拉飞车，马斯克：放屁",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684957?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "· OpenAI 为 OpenCode 受攻击用户退还被消耗的 API 额度 · 王腾宣布今日宜休将于 10 月 29 日举办首场发布会 · 引望与宁德时代签署换电合作协议，覆盖电池与换电网络 #欢迎关注爱范儿官方微信公"
+    }
+   ],
+   "note": "RSS 实时抓取（爱范儿 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "Meta Llama",
+   "source_type": "国内资讯站（雷峰网 RSS）",
+   "source_url": "https://www.leiphone.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "喊出300万张订单，英伟达RTX PRO 5500为何遭到提前疯抢？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/chips/STx9ZzfDNh5W80Bm.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "在AI算力市场，等风声传开再下注，往往已经慢了半拍。 早在8月份，服务器产品经理夏寅卿已经开始向客户推介还未面世的RTX PRO 5500。一个月后，这张最新PRO系列专业工作站显卡才默默出现在英伟达官网。 然而，RTX"
+    },
+    {
+     "title": "双11 iPhone Duo货源大战：苹果为什么把更多货交给天猫？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/1kN394wi9h0iFG43.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "10月20日晚8点，天猫双11将正式开卖。iPhone Duo首发的货源之战，也成了今年双11各大电商平台实力较量的一个缩影。 10月16日晚8点，苹果首款折叠屏手机iPhone Duo正式开启预售。毫无悬念，首批货源短"
+    },
+    {
+     "title": "亚太唯一！阿里云连续4年获评 Gartner 容器管理领导者象限",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/z75kiSSlXYqfCza6.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "近日，国际权威咨询公司Gartner正式发布2026年度《容器管理魔力象限》报告，阿里云连续4年入选该报告，稳居“领导者”象限，是亚太地区唯一获此殊荣的科技公司。 Gartner在报告中将“丰富的AI集成”、“全面的功能"
+    },
+    {
+     "title": "580天暗战，爱奇艺的AI闯关路",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/jJI2TPXI1eYWxECq.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "今年4月，在北京的一场影视行业论坛上，爱奇艺基础架构与智能分发事业群总裁刘文峰正通过大屏幕演示手机端的一个新功能“跳看”：前一秒还是画师在寺庙中留下一幅未完成点睛的画作，手指一滑，屏幕中一个黑衣人潜入寺中，还未走出几步，"
+    }
+   ],
+   "note": "RSS 实时抓取（雷峰网 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "Perplexity",
+   "source_type": "国内资讯站（雷峰网 RSS）",
+   "source_url": "https://www.leiphone.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "停止加薪！大众计划冻结全球大量员工薪酬至2030年；突发！美国发布DeepSeek禁令；马斯克：明年向全美儿童赠送SpaceX股票",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/zaobao/Y7039p8HsmmeQClm.html",
+     "source": "雷峰网",
+     "excerpt": "要闻提示 1.停止加薪！大众计划冻结员工薪酬至2030年，涉及全球大量员工 2.突发！美国发布DeepSeek禁令 3.花钱之前先问网友意见！「钱包请等等」突然爆火：主打「劝你别买」 4.豆包辟谣超一半算力在造爽剧：不靠"
+    },
+    {
+     "title": "喊出300万张订单，英伟达RTX PRO 5500为何遭到提前疯抢？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/chips/STx9ZzfDNh5W80Bm.html",
+     "source": "雷峰网",
+     "excerpt": "在AI算力市场，等风声传开再下注，往往已经慢了半拍。 早在8月份，服务器产品经理夏寅卿已经开始向客户推介还未面世的RTX PRO 5500。一个月后，这张最新PRO系列专业工作站显卡才默默出现在英伟达官网。 然而，RTX"
+    },
+    {
+     "title": "双11 iPhone Duo货源大战：苹果为什么把更多货交给天猫？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/1kN394wi9h0iFG43.html",
+     "source": "雷峰网",
+     "excerpt": "10月20日晚8点，天猫双11将正式开卖。iPhone Duo首发的货源之战，也成了今年双11各大电商平台实力较量的一个缩影。 10月16日晚8点，苹果首款折叠屏手机iPhone Duo正式开启预售。毫无悬念，首批货源短"
+    },
+    {
+     "title": "亚太唯一！阿里云连续4年获评 Gartner 容器管理领导者象限",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/z75kiSSlXYqfCza6.html",
+     "source": "雷峰网",
+     "excerpt": "近日，国际权威咨询公司Gartner正式发布2026年度《容器管理魔力象限》报告，阿里云连续4年入选该报告，稳居“领导者”象限，是亚太地区唯一获此殊荣的科技公司。 Gartner在报告中将“丰富的AI集成”、“全面的功能"
+    }
+   ],
+   "note": "RSS 实时抓取（雷峰网），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "面壁MiniCPM",
+   "source_type": "国内资讯站（量子位 RSS）",
+   "source_url": "https://www.qbitai.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Claude新模型曝光！能跳出思维定势，修Bug治标又治本",
+     "date": "2026-10-20",
+     "url": "https://www.qbitai.com/2026/10/504314.html",
+     "source": "量子位",
+     "excerpt": "OpenAI只掏出一个6.1 Terra…"
+    },
+    {
+     "title": "从百比特芯片到整机交付，这家量子计算公司正将量子算力推向可调用服务",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504277.html",
+     "source": "量子位",
+     "excerpt": "同步搭建千比特规模量子算力云平台"
+    },
+    {
+     "title": "通研院孵化的团队，也盯上了RSI",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504294.html",
+     "source": "量子位",
+     "excerpt": "当AI越来越懂你，如何让智能真正属于你？"
+    },
+    {
+     "title": "2026物理AI与世界模型大会医疗健康世界模型分会场在南京举行",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504266.html",
+     "source": "量子位",
+     "excerpt": "2026年10月19日下午，医疗健康世界模型分会场在南京国际博览中心钟山厅举行"
+    }
+   ],
+   "note": "RSS 实时抓取（量子位），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "Groq",
+   "source_type": "国内资讯站（量子位 RSS）",
+   "source_url": "https://www.qbitai.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Claude新模型曝光！能跳出思维定势，修Bug治标又治本",
+     "date": "2026-10-20",
+     "url": "https://www.qbitai.com/2026/10/504314.html",
+     "source": "量子位",
+     "excerpt": "OpenAI只掏出一个6.1 Terra…"
+    },
+    {
+     "title": "从百比特芯片到整机交付，这家量子计算公司正将量子算力推向可调用服务",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504277.html",
+     "source": "量子位",
+     "excerpt": "同步搭建千比特规模量子算力云平台"
+    },
+    {
+     "title": "通研院孵化的团队，也盯上了RSI",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504294.html",
+     "source": "量子位",
+     "excerpt": "当AI越来越懂你，如何让智能真正属于你？"
+    },
+    {
+     "title": "2026物理AI与世界模型大会医疗健康世界模型分会场在南京举行",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504266.html",
+     "source": "量子位",
+     "excerpt": "2026年10月19日下午，医疗健康世界模型分会场在南京国际博览中心钟山厅举行"
+    }
+   ],
+   "note": "RSS 实时抓取（量子位），非人工编辑，条目以 RSS 源为准"
+  },
+  {
+   "provider": "通义千问",
+   "source_type": "国内资讯站（IT之家 RSS）",
+   "source_url": "https://www.ithome.com/rss/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "三星 Galaxy S27 系列手机基带曝光：芯片面积减少约 4%，增强卫星通信等能力",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/544.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"01bb\">IT之家 10 月 20 日消息，韩媒 The Elec 今天（10 月 20 日）发布博文，三星 System LSI 部门正加速推进移动调制解调器技术升级，下一代外置 5G "
+    },
+    {
+     "title": "46mm 款 3399 → 2619 元：苹果 Apple Watch Series 12 国补直降",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/543.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"2ea8\">苹果 Apple Watch Series 12 开售于 2026 年 9 月，GPS 款 46mm 定价 3399 元。</p><p data-vmark=\"4492\">京东 "
+    },
+    {
+     "title": "热泵洗烘一体不到 3.5k 还有谁：海信 E7Q 3227 元破冰新低，升级款 E8Q 仅 4369 元",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/542.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"099b\">海信京东 11.11 品牌日现已开启，即日起 ~25 日每天都有年内好价：<a href=\"https://u.jd.com/5615WCJ\" target=\"_blank\" d"
+    },
+    {
+     "title": "理想汽车连山电池保障计划正式发布：电池不自燃、碰撞不起火终身保障",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/541.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"282b\">IT之家 10 月 20 日消息，在今晚的 Power Day 理想汽车电动技术发布会上，理想汽车连山电池保障计划正式发布，其中包含两项终身保障：</p><blockquote>"
+    }
+   ],
+   "note": "RSS 实时抓取（IT之家 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "硅基流动",
+   "source_type": "国内资讯站（爱范儿 RSS）",
+   "source_url": "https://www.ifanr.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "押注记忆原生，MemT 1.0 破局养成系 AI 下半场",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684997?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "MemT 1.0 开源，给出「记忆原生」新解法 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "特斯拉只能飞 5 秒？科学家称其为「放屁车」，联邦航空局：不符合航空器定义",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684938?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "马斯克：我朝你放个屁。 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "苹果新发布会官宣：iPad mini 终于配「高刷」，MacBook 要能「上手」了",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684978?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "真·高端局 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。"
+    },
+    {
+     "title": "早报｜苹果定档下周发布新品，触屏MacBook Pro或将亮相/华为苹果拿下中国手机四成份额/杨立昆锐评特斯拉飞车，马斯克：放屁",
+     "date": "2026-10-20",
+     "url": "https://www.ifanr.com/1684957?utm_source=rss&utm_medium=rss&utm_campaign=",
+     "source": "爱范儿 RSS",
+     "excerpt": "· OpenAI 为 OpenCode 受攻击用户退还被消耗的 API 额度 · 王腾宣布今日宜休将于 10 月 29 日举办首场发布会 · 引望与宁德时代签署换电合作协议，覆盖电池与换电网络 #欢迎关注爱范儿官方微信公"
+    }
+   ],
+   "note": "RSS 实时抓取（爱范儿 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "腾讯混元",
+   "source_type": "国内资讯站（雷峰网 RSS）",
+   "source_url": "https://www.leiphone.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "喊出300万张订单，英伟达RTX PRO 5500为何遭到提前疯抢？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/chips/STx9ZzfDNh5W80Bm.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "在AI算力市场，等风声传开再下注，往往已经慢了半拍。 早在8月份，服务器产品经理夏寅卿已经开始向客户推介还未面世的RTX PRO 5500。一个月后，这张最新PRO系列专业工作站显卡才默默出现在英伟达官网。 然而，RTX"
+    },
+    {
+     "title": "双11 iPhone Duo货源大战：苹果为什么把更多货交给天猫？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/1kN394wi9h0iFG43.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "10月20日晚8点，天猫双11将正式开卖。iPhone Duo首发的货源之战，也成了今年双11各大电商平台实力较量的一个缩影。 10月16日晚8点，苹果首款折叠屏手机iPhone Duo正式开启预售。毫无悬念，首批货源短"
+    },
+    {
+     "title": "亚太唯一！阿里云连续4年获评 Gartner 容器管理领导者象限",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/z75kiSSlXYqfCza6.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "近日，国际权威咨询公司Gartner正式发布2026年度《容器管理魔力象限》报告，阿里云连续4年入选该报告，稳居“领导者”象限，是亚太地区唯一获此殊荣的科技公司。 Gartner在报告中将“丰富的AI集成”、“全面的功能"
+    },
+    {
+     "title": "580天暗战，爱奇艺的AI闯关路",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/jJI2TPXI1eYWxECq.html",
+     "source": "雷峰网 RSS",
+     "excerpt": "今年4月，在北京的一场影视行业论坛上，爱奇艺基础架构与智能分发事业群总裁刘文峰正通过大屏幕演示手机端的一个新功能“跳看”：前一秒还是画师在寺庙中留下一幅未完成点睛的画作，手指一滑，屏幕中一个黑衣人潜入寺中，还未走出几步，"
+    }
+   ],
+   "note": "RSS 实时抓取（雷峰网 RSS），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "Kimi",
+   "source_type": "国内资讯站（IT之家 RSS）",
+   "source_url": "https://www.ithome.com/rss/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "三星 Galaxy S27 系列手机基带曝光：芯片面积减少约 4%，增强卫星通信等能力",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/544.htm",
+     "source": "IT之家",
+     "excerpt": "<p data-vmark=\"01bb\">IT之家 10 月 20 日消息，韩媒 The Elec 今天（10 月 20 日）发布博文，三星 System LSI 部门正加速推进移动调制解调器技术升级，下一代外置 5G "
+    },
+    {
+     "title": "46mm 款 3399 → 2619 元：苹果 Apple Watch Series 12 国补直降",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/543.htm",
+     "source": "IT之家",
+     "excerpt": "<p data-vmark=\"2ea8\">苹果 Apple Watch Series 12 开售于 2026 年 9 月，GPS 款 46mm 定价 3399 元。</p><p data-vmark=\"4492\">京东 "
+    },
+    {
+     "title": "热泵洗烘一体不到 3.5k 还有谁：海信 E7Q 3227 元破冰新低，升级款 E8Q 仅 4369 元",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/542.htm",
+     "source": "IT之家",
+     "excerpt": "<p data-vmark=\"099b\">海信京东 11.11 品牌日现已开启，即日起 ~25 日每天都有年内好价：<a href=\"https://u.jd.com/5615WCJ\" target=\"_blank\" d"
+    },
+    {
+     "title": "理想汽车连山电池保障计划正式发布：电池不自燃、碰撞不起火终身保障",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/541.htm",
+     "source": "IT之家",
+     "excerpt": "<p data-vmark=\"282b\">IT之家 10 月 20 日消息，在今晚的 Power Day 理想汽车电动技术发布会上，理想汽车连山电池保障计划正式发布，其中包含两项终身保障：</p><blockquote>"
+    }
+   ],
+   "note": "RSS 实时抓取（IT之家），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "StepFun",
+   "source_type": "国内资讯站（雷峰网 RSS）",
+   "source_url": "https://www.leiphone.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "停止加薪！大众计划冻结全球大量员工薪酬至2030年；突发！美国发布DeepSeek禁令；马斯克：明年向全美儿童赠送SpaceX股票",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/zaobao/Y7039p8HsmmeQClm.html",
+     "source": "雷峰网",
+     "excerpt": "要闻提示 1.停止加薪！大众计划冻结员工薪酬至2030年，涉及全球大量员工 2.突发！美国发布DeepSeek禁令 3.花钱之前先问网友意见！「钱包请等等」突然爆火：主打「劝你别买」 4.豆包辟谣超一半算力在造爽剧：不靠"
+    },
+    {
+     "title": "喊出300万张订单，英伟达RTX PRO 5500为何遭到提前疯抢？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/chips/STx9ZzfDNh5W80Bm.html",
+     "source": "雷峰网",
+     "excerpt": "在AI算力市场，等风声传开再下注，往往已经慢了半拍。 早在8月份，服务器产品经理夏寅卿已经开始向客户推介还未面世的RTX PRO 5500。一个月后，这张最新PRO系列专业工作站显卡才默默出现在英伟达官网。 然而，RTX"
+    },
+    {
+     "title": "双11 iPhone Duo货源大战：苹果为什么把更多货交给天猫？",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/1kN394wi9h0iFG43.html",
+     "source": "雷峰网",
+     "excerpt": "10月20日晚8点，天猫双11将正式开卖。iPhone Duo首发的货源之战，也成了今年双11各大电商平台实力较量的一个缩影。 10月16日晚8点，苹果首款折叠屏手机iPhone Duo正式开启预售。毫无悬念，首批货源短"
+    },
+    {
+     "title": "亚太唯一！阿里云连续4年获评 Gartner 容器管理领导者象限",
+     "date": "2026-10-20",
+     "url": "https://www.leiphone.com/category/industrynews/z75kiSSlXYqfCza6.html",
+     "source": "雷峰网",
+     "excerpt": "近日，国际权威咨询公司Gartner正式发布2026年度《容器管理魔力象限》报告，阿里云连续4年入选该报告，稳居“领导者”象限，是亚太地区唯一获此殊荣的科技公司。 Gartner在报告中将“丰富的AI集成”、“全面的功能"
+    }
+   ],
+   "note": "RSS 实时抓取（雷峰网），条目以源为准，未经人工编辑"
+  },
+  {
+   "provider": "Cohere",
+   "source_type": "国内资讯站（量子位 RSS）",
+   "source_url": "https://www.qbitai.com/feed",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Claude新模型曝光！能跳出思维定势，修Bug治标又治本",
+     "date": "2026-10-20",
+     "url": "https://www.qbitai.com/2026/10/504314.html",
+     "source": "量子位",
+     "excerpt": "OpenAI只掏出一个6.1 Terra…"
+    },
+    {
+     "title": "从百比特芯片到整机交付，这家量子计算公司正将量子算力推向可调用服务",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504277.html",
+     "source": "量子位",
+     "excerpt": "同步搭建千比特规模量子算力云平台"
+    },
+    {
+     "title": "通研院孵化的团队，也盯上了RSI",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504294.html",
+     "source": "量子位",
+     "excerpt": "当AI越来越懂你，如何让智能真正属于你？"
+    },
+    {
+     "title": "2026物理AI与世界模型大会医疗健康世界模型分会场在南京举行",
+     "date": "2026-10-19",
+     "url": "https://www.qbitai.com/2026/10/504266.html",
+     "source": "量子位",
+     "excerpt": "2026年10月19日下午，医疗健康世界模型分会场在南京国际博览中心钟山厅举行"
+    }
+   ],
+   "note": "RSS 实时抓取（量子位），非人工编辑，条目以 RSS 源为准"
+  },
+  {
+   "provider": "OpenAI",
+   "source_type": "国内资讯站（IT之家 RSS）",
+   "source_url": "https://www.ithome.com/rss/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "三星 Galaxy S27 系列手机基带曝光：芯片面积减少约 4%，增强卫星通信等能力",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/544.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"01bb\">IT之家 10 月 20 日消息，韩媒 The Elec 今天（10 月 20 日）发布博文，三星 System LSI 部门正加速推进移动调制解调器技术升级，下一代外置 5G "
+    },
+    {
+     "title": "46mm 款 3399 → 2619 元：苹果 Apple Watch Series 12 国补直降",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/543.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"2ea8\">苹果 Apple Watch Series 12 开售于 2026 年 9 月，GPS 款 46mm 定价 3399 元。</p><p data-vmark=\"4492\">京东 "
+    },
+    {
+     "title": "热泵洗烘一体不到 3.5k 还有谁：海信 E7Q 3227 元破冰新低，升级款 E8Q 仅 4369 元",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/542.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"099b\">海信京东 11.11 品牌日现已开启，即日起 ~25 日每天都有年内好价：<a href=\"https://u.jd.com/5615WCJ\" target=\"_blank\" d"
+    },
+    {
+     "title": "理想汽车连山电池保障计划正式发布：电池不自燃、碰撞不起火终身保障",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/541.htm",
+     "source": "IT之家 RSS",
+     "excerpt": "<p data-vmark=\"282b\">IT之家 10 月 20 日消息，在今晚的 Power Day 理想汽车电动技术发布会上，理想汽车连山电池保障计划正式发布，其中包含两项终身保障：</p><blockquote>"
+    }
+   ],
+   "note": "RSS 实时抓取（IT之家 RSS），条目以源为准，未经人工编辑"
   }
  ],
  "peak_valley": [
@@ -3584,6 +5656,72 @@
    "note": "字段留空而非编造折扣率；后续由具备境外网络的运维在官方文档补齐",
    "source_url": "https://www.anthropic.com/pricing",
    "source_name": "Anthropic · Plans & pricing"
+  },
+  {
+   "provider": "腾讯混元",
+   "scope": "官方 API（hy2 / hy3 / hy3-pro 全模型）",
+   "tz": "UTC（官方原文口径）",
+   "peak_windows": "UTC 00:00-16:00（含周末），8 小时峰时窗口",
+   "valley_windows": "UTC 16:00-24:00（含周末），16 小时谷时窗口",
+   "discount": "谷时价为峰时的 62.5%（0.0825 vs 0.132 USD/M，约 -37.5%）",
+   "multiplier": {
+    "peak": 1.0,
+    "valley": 0.625
+   },
+   "evidence": "Hy3 峰时 0.528 元/百万输出（0.132 USD），谷时 0.33 元/百万输出（0.0825 USD）；OpenRouter overrides 确认 UTC 0-1600 峰、1600-0 谷",
+   "source": {
+    "name": "腾讯云 · 混元大模型计费文档",
+    "url": "https://cloud.tencent.com/document/product/1758/101818",
+    "kind": "vendor_official",
+    "as_of": "2026-10-20"
+   },
+   "source_url": "https://cloud.tencent.com/document/product/1758/101818",
+   "source_name": "腾讯云 · 混元大模型计费文档",
+   "note": "腾讯是少数在官方文档中给出 24 小时全局时段折扣（非仅工作日）的厂商"
+  },
+  {
+   "provider": "OpenAI",
+   "scope": "官方 :batch 批量接口（gpt-6.1-sol-pro 系列，:batch 后缀）",
+   "tz": "UTC（官方原文口径）",
+   "peak_windows": "不适用（非时段折扣，为批量异步折扣）",
+   "valley_windows": "全时段（异步批处理）",
+   "discount": "批量异步价 = 实时价 × 0.5（半价）",
+   "multiplier": {
+    "peak": 2.0,
+    "valley": 1.0
+   },
+   "evidence": "gpt-6.1-sol-pro 实时 $2/$10 per M；:batch 后缀 $1/$5 per M",
+   "source": {
+    "name": "OpenAI · Pricing",
+    "url": "https://platform.openai.com/docs/pricing",
+    "kind": "vendor_official",
+    "as_of": "2026-10-20"
+   },
+   "source_url": "https://platform.openai.com/docs/pricing",
+   "source_name": "OpenAI · Pricing",
+   "note": "本机 HTTP 403 无法取官方文档；:batch 半价来自 OpenRouter catalog 双源标注"
+  },
+  {
+   "provider": "MiniMax",
+   "scope": "官方 :batch 批量接口（minimax-m3 系列，:batch 后缀）",
+   "tz": "UTC（官方原文口径）",
+   "peak_windows": "不适用（非时段折扣）",
+   "valley_windows": "全时段（异步批处理）",
+   "discount": "批量异步价 = 实时价 × 0.25（4× 折扣）",
+   "multiplier": {
+    "peak": 4.0,
+    "valley": 1.0
+   },
+   "evidence": "minimax-m3 输出实时 $1.2/M，:batch $0.3/M；输入实时 $0.3/M，:batch $0.075/M",
+   "source": {
+    "name": "MiniMax · Pricing",
+    "url": "https://platform.minimaxi.com/document/pricing",
+    "kind": "vendor_official",
+    "as_of": "2026-10-20"
+   },
+   "source_url": "https://platform.minimaxi.com/document/pricing",
+   "source_name": "MiniMax · Pricing",
+   "note": "MiniMax 批量折扣 4×，与 Kimi 同属国内厂商对异步批量的激进定价策略"
   }
  ],
  "source_health": [
@@ -3814,11 +5952,11 @@
   },
   {
    "url": "https://www.jiqizhixin.com/rss",
-   "ok": true,
+   "ok": false,
    "bytes": 3375,
    "kind": "news_rss",
    "as_of": "2026-10-20",
-   "note": "仅广告条目，正文需 JS 渲染"
+   "note": "返回 HTML 而非 RSS（2026-10-20 复测），已剔除出新闻取数源"
   },
   {
    "url": "https://www.qbitai.com/feed",
@@ -3883,6 +6021,238 @@
    "error": "empty feed body",
    "kind": "news_rss",
    "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.sensenova.cn/",
+   "ok": true,
+   "bytes": 15109,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200，本机可达"
+  },
+  {
+   "url": "https://platform.baichuan-ai.com/",
+   "ok": true,
+   "bytes": 5082,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200，本机可达"
+  },
+  {
+   "url": "https://openbmb.cn/",
+   "ok": true,
+   "bytes": 10085,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200，本机可达"
+  },
+  {
+   "url": "https://modelscope.cn/docs/deploy/api-inference",
+   "ok": true,
+   "bytes": 4975,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200，本机可达"
+  },
+  {
+   "url": "https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Clksln7f4",
+   "ok": true,
+   "bytes": 433250,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200；文档可达，表格 JS 渲染需登录取单价"
+  },
+  {
+   "url": "https://github.com/meituan/longcat",
+   "ok": true,
+   "bytes": 5000,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "GitHub README 公开"
+  },
+  {
+   "url": "https://www.volcengine.com/docs/82379/109932",
+   "ok": true,
+   "bytes": 5000,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "文档可达；精确单价需登录控制台"
+  },
+  {
+   "url": "https://build.nvidia.com/models",
+   "ok": true,
+   "bytes": 472258,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200，本机可达"
+  },
+  {
+   "url": "https://aws.amazon.com/bedrock/pricing/",
+   "ok": true,
+   "bytes": 60000,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200；表格 JS 渲染"
+  },
+  {
+   "url": "https://huggingface.co/ibm-granite",
+   "ok": false,
+   "bytes": 0,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "本机超时（大陆网络不可达）"
+  },
+  {
+   "url": "https://huggingface.co/meta-llama",
+   "ok": false,
+   "bytes": 0,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "本机超时（大陆网络不可达）"
+  },
+  {
+   "url": "https://docs.perplexity.ai/",
+   "ok": false,
+   "bytes": 0,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "本机超时（大陆网络不可达）"
+  },
+  {
+   "url": "https://groq.com/pricing",
+   "ok": true,
+   "bytes": 55004,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200"
+  },
+  {
+   "url": "https://deepinfra.com/pricing",
+   "ok": true,
+   "bytes": 560747,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200"
+  },
+  {
+   "url": "https://fireworks.ai/pricing",
+   "ok": true,
+   "bytes": 243181,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200"
+  },
+  {
+   "url": "https://www.together.ai/pricing",
+   "ok": true,
+   "bytes": 600000,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200"
+  },
+  {
+   "url": "https://replicate.com/pricing",
+   "ok": true,
+   "bytes": 86519,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200"
+  },
+  {
+   "url": "https://xinghuo.xfyun.cn/",
+   "ok": true,
+   "bytes": 4157,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200；旧路径 /doc/spark/Price.html 已 404"
+  },
+  {
+   "url": "https://support.huaweicloud.com/price-pangu/pangu_price_011.html",
+   "ok": true,
+   "bytes": 2188,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200"
+  },
+  {
+   "url": "https://www.qbitai.com/feed",
+   "ok": true,
+   "bytes": 6345,
+   "kind": "news_cn",
+   "as_of": "2026-10-20",
+   "note": "RSS 实时可达"
+  },
+  {
+   "url": "https://www.ithome.com/rss/",
+   "ok": true,
+   "bytes": 328909,
+   "kind": "news_cn",
+   "as_of": "2026-10-20",
+   "note": "RSS 实时可达"
+  },
+  {
+   "url": "https://www.ifanr.com/feed",
+   "ok": true,
+   "bytes": 481394,
+   "kind": "news_cn",
+   "as_of": "2026-10-20",
+   "note": "RSS 实时可达"
+  },
+  {
+   "url": "https://www.leiphone.com/feed",
+   "ok": true,
+   "bytes": 600000,
+   "kind": "news_cn",
+   "as_of": "2026-10-20",
+   "note": "RSS 实时可达"
+  },
+  {
+   "url": "https://www.jiqizhixin.com/rss",
+   "ok": false,
+   "bytes": 3375,
+   "kind": "news_cn",
+   "as_of": "2026-10-20",
+   "note": "返回 HTML 而非 RSS（2026-10-20 复测），已剔除出新闻取数源"
+  },
+  {
+   "url": "https://36kr.com/feed",
+   "ok": false,
+   "bytes": 25361,
+   "kind": "news_cn",
+   "as_of": "2026-10-20",
+   "note": "返回 HTML 而非 RSS（2026-10-20 复测），已剔除出新闻取数源"
+  },
+  {
+   "url": "https://siliconflow.cn/pricing",
+   "ok": true,
+   "bytes": 600000,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 200；JS 渲染，取回空壳 HTML"
+  },
+  {
+   "url": "https://www.xfyun.cn/doc/spark/Price.html",
+   "ok": false,
+   "bytes": 0,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 404（已迁移至 xinghuo.xfyun.cn）"
+  },
+  {
+   "url": "https://api.siliconflow.cn/v1/model/list/all",
+   "ok": false,
+   "bytes": 0,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "HTTP 404（已下线）"
+  },
+  {
+   "url": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/",
+   "ok": false,
+   "bytes": 0,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "本机读取超时（大陆网络慢）"
   }
  ],
  "unresolved": [
@@ -3893,7 +6263,13 @@
   "www.volcengine.com/docs/82379/1544106 与 /pricing?product=Ark：需登录控制台，豆包官方 tokens 单价未取到",
   "platform.lingyiwanwu.com 定价路径 404 且 yi.com 域名解析失败：ZeroOne 价格完全不可核验",
   "机器之心正文与 RSS 需 JS 渲染/仅广告条目：新闻区块改用量子位/IT之家/爱范儿/雷峰网四路 RSS",
-  "anthropic.com/pricing 仅含订阅计划价：Claude API 每百万 tokens 单价需在 platform 控制台确认"
+  "anthropic.com/pricing 仅含订阅计划价：Claude API 每百万 tokens 单价需在 platform 控制台确认",
+  "docs.perplexity.ai / huggingface.co / azure.microsoft.com：本机 DNS 超时或读取超时（大陆网络不可达）——Perplexity Sonar、IBM Granite、Meta Llama、Azure OpenAI 官方单价均不可核验",
+  "Sakana.ai/news 已 404；Sakana Fugu Ultra 仅取 OpenRouter 目录价",
+  "讯飞星火旧文档路径 /doc/spark/Price.html 已 404；新入口 xinghuo.xfyun.cn 需登录取单价",
+  "cloud.baidu.com/doc/WENXINWORKSHOP 可达但价格表为 JS 渲染，文心一言 4.5 精确单价需登录控制台",
+  "api.siliconflow.cn/v1/model/list/all 已 404；价格页 https://siliconflow.cn/pricing 亦为 JS 渲染（取回约 600KB 空壳）",
+  "jiqizhixin.com/rss 与 36kr.com/feed 实测返回 HTML 而非 RSS XML（2026-10-20 复测），已从 provider_news 取数源剔除，国内资讯改用 量子位 / IT之家 / 爱范儿 / 雷峰网 四路 RSS"
  ],
  "deprecated_paths": [
   {
@@ -3917,5 +6293,12 @@
    "error": "404"
   }
  ],
- "legacy_note": "v1 旧字段 provider/description/context_length 已保留在 provider.name 与 model.note 中，前端同时读新字段 v2 与旧字段以兼容缓存。"
+ "legacy_note": "v1 旧字段 provider/description/context_length 已保留在 provider.name 与 model.note 中，前端同时读新字段 v2 与旧字段以兼容缓存。",
+ "statistics": {
+  "providers_total": 32,
+  "models_total": 130,
+  "dual_sourced": 86,
+  "with_peak_valley": 9,
+  "with_official_cn_source": 18
+ }
 }
