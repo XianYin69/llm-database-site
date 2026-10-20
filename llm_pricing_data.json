@@ -1,116 +1,3921 @@
 {
-  "generated_at": "2026-10-15T23:35:00Z",
-  "providers": [
+ "schema_version": "2.0",
+ "generated_at": "2026-10-20T09:17:24Z",
+ "data_as_of": "2026-10-20",
+ "fx_rate_note": "CNY 价格另附约 USD 换算值，汇率约 1 USD = 7.10 CNY，仅用于横向对比，不构成官方报价",
+ "methodology": "价格与参数来自下表各厂商官方文档（国内直连可达者）与 OpenRouter catalog API；国内访问不到的官方站（openai.com / docs.x.ai / docs.mistral.ai / ai.google.dev）一律改用国内可检索的聚合目录与模型资讯站取数，并在 sources[].note 与 cross_check 字段标注口径差异。凡未能核验官方单价的条目，cross_check 标注为「仅聚合源」或「无可核验源」，价格字段留空而非估算填补。",
+ "taxonomy": {
+  "regions": {
+   "china": {
+    "value": "中国大陆"
+   },
+   "overseas": {
+    "value": "海外"
+   }
+  },
+  "groups": {
+   "china": {
+    "value": "国内厂商"
+   },
+   "china_aggregate": {
+    "value": "国内聚合/模型广场"
+   },
+   "overseas": {
+    "value": "海外厂商"
+   },
+   "overseas_aggregate": {
+    "value": "海外聚合网关"
+   }
+  },
+  "categories": {
+   "general": "通用对话",
+   "reasoning": "推理",
+   "code": "代码",
+   "multimodal": "多模态",
+   "audio": "语音",
+   "video": "视频生成",
+   "image": "图像生成",
+   "embedding": "向量",
+   "unknown": "未分类"
+  },
+  "china_access": {
+   "unrestricted": "国内可直连",
+   "restricted": "国内不可直连（需代理）",
+   "blocked": "国内基本不可达"
+  }
+ },
+ "providers": [
+  {
+   "name": "OpenAI",
+   "en_name": "OpenAI",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://platform.openai.com/docs/pricing",
+   "has_official_cn_source": false,
+   "models": [
     {
-      "provider": "OpenAI",
-      "models": [
-        {
-          "model_id": "gpt-4o",
-          "input_price_per_million": 2.50,
-          "output_price_per_million": 10.00,
-          "context_length": 128000,
-          "description": "OpenAI's most capable generalist model with multimodal capabilities"
-        },
-        {
-          "model_id": "gpt-4o-mini",
-          "input_price_per_million": 0.15,
-          "output_price_per_million": 0.60,
-          "context_length": 128000,
-          "description": "OpenAI's affordable and intelligent small model for efficient tasks"
-        },
-        {
-          "model_id": "o1-preview",
-          "input_price_per_million": 15.00,
-          "output_price_per_million": 60.00,
-          "context_length": 128000,
-          "description": "OpenAI's reasoning model for complex problem-solving"
-        },
-        {
-          "model_id": "o1-mini",
-          "input_price_per_million": 3.00,
-          "output_price_per_million": 12.00,
-          "context_length": 128000,
-          "description": "OpenAI's compact reasoning model for cost-effective tasks"
-        }
-      ]
+     "model_id": "gpt-6.1-sol",
+     "name": "GPT-6.1 Sol",
+     "category": "general",
+     "context_length": 1050000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "OpenAI · 定价页",
+       "url": "https://platform.openai.com/docs/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "本机返回 HTTP 403（地区/反爬限制），未能核验官方单价"
+      }
+     ],
+     "cross_check": "仅聚合源（官方 403）",
+     "note": "官方定价页本机 HTTP 403，价格取自 OpenRouter 目录价",
+     "uid": "OpenAI :: gpt-6.1-sol"
     },
     {
-      "provider": "Anthropic",
-      "models": [
-        {
-          "model_id": "claude-3-5-sonnet-20241022",
-          "input_price_per_million": 3.00,
-          "output_price_per_million": 15.00,
-          "context_length": 200000,
-          "description": "Anthropic's most capable generalist model with improved reasoning"
-        },
-        {
-          "model_id": "claude-3-opus-20240229",
-          "input_price_per_million": 15.00,
-          "output_price_per_million": 75.00,
-          "context_length": 200000,
-          "description": "Anthropic's most powerful model for complex, high-stakes tasks"
-        },
-        {
-          "model_id": "claude-3-haiku-20240307",
-          "input_price_per_million": 0.25,
-          "output_price_per_million": 1.25,
-          "context_length": 200000,
-          "description": "Anthropic's fastest and most compact model for simple tasks"
-        }
-      ]
+     "model_id": "gpt-6.1-sol-pro",
+     "name": "GPT-6.1 Sol Pro",
+     "category": "reasoning",
+     "context_length": 1050000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "OpenAI :: gpt-6.1-sol-pro"
     },
     {
-      "provider": "Google",
-      "models": [
-        {
-          "model_id": "gemini-2.0-flash",
-          "input_price_per_million": 0.10,
-          "output_price_per_million": 0.40,
-          "context_length": 1048576,
-          "description": "Google's fast multimodal model with 1M context window"
-        },
-        {
-          "model_id": "gemini-2.0-flash-thinking",
-          "input_price_per_million": 0.10,
-          "output_price_per_million": 0.40,
-          "context_length": 1048576,
-          "description": "Google's thinking-enabled model for complex reasoning"
-        },
-        {
-          "model_id": "gemini-2.0-pro-exp",
-          "input_price_per_million": 1.25,
-          "output_price_per_million": 5.00,
-          "context_length": 1048576,
-          "description": "Google's experimental prototype model with advanced capabilities"
-        }
-      ]
+     "model_id": "gpt-6-astra",
+     "name": "GPT-6 Astra",
+     "category": "reasoning",
+     "context_length": 1050000,
+     "currency": "USD",
+     "input_price_per_million": 10.0,
+     "output_price_per_million": 50.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 10.0,
+     "output_price_usd_per_million": 50.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "OpenAI :: gpt-6-astra"
     },
     {
-      "provider": "Mistral",
-      "models": [
-        {
-          "model_id": "mistral-large-2",
-          "input_price_per_million": 2.00,
-          "output_price_per_million": 6.00,
-          "context_length": 131072,
-          "description": "Mistral's largest and most capable model for general tasks"
-        },
-        {
-          "model_id": "mistral-medium",
-          "input_price_per_million": 0.50,
-          "output_price_per_million": 1.50,
-          "context_length": 32768,
-          "description": "Mistral's balanced model for efficient performance"
-        },
-        {
-          "model_id": "codestral",
-          "input_price_per_million": 0.30,
-          "output_price_per_million": 0.90,
-          "context_length": 32768,
-          "description": "Mistral's specialized model for code generation and understanding"
-        }
-      ]
+     "model_id": "gpt-6-luna",
+     "name": "GPT-6 Luna",
+     "category": "general",
+     "context_length": 1050000,
+     "currency": "USD",
+     "input_price_per_million": 0.1,
+     "output_price_per_million": 0.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.1,
+     "output_price_usd_per_million": 0.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "OpenAI :: gpt-6-luna"
+    },
+    {
+     "model_id": "gpt-5.6-luna",
+     "name": "GPT-5.6 Luna",
+     "category": "general",
+     "context_length": 1050000,
+     "currency": "USD",
+     "input_price_per_million": 0.2,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.2,
+     "output_price_usd_per_million": 1.2,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "OpenAI :: gpt-5.6-luna"
     }
-  ]
+   ],
+   "catalog_model_count": 65,
+   "pricing_status": "不可核验（403）",
+   "pricing_note": "platform.openai.com/docs/pricing 与 /api/pricing/ 均返回 HTTP 403，官方单价无法核验；表内为 OpenRouter 目录价（含平台费）",
+   "latest_news_url": "https://openai.com/news/"
+  },
+  {
+   "name": "Anthropic",
+   "en_name": "Anthropic (Claude)",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://www.anthropic.com/pricing",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "claude-opus-5.5",
+     "name": "Claude Opus 5.5",
+     "category": "reasoning",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 4.0,
+     "output_price_per_million": 20.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 4.0,
+     "output_price_usd_per_million": 20.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "Anthropic · Plans & pricing",
+       "url": "https://www.anthropic.com/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "可取回 200，但仅订阅价（Free/Pro/Max），无 API 单价表"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "note": "官方页可访问但只给订阅价：Pro $17/月（年付）或 $20/月、Max 自 $100/月起",
+     "uid": "Anthropic :: claude-opus-5.5"
+    },
+    {
+     "model_id": "claude-sonnet-5.5",
+     "name": "Claude Sonnet 5.5",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "Anthropic · Plans & pricing",
+       "url": "https://www.anthropic.com/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "可取回 200，但仅订阅价（Free/Pro/Max），无 API 单价表"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Anthropic :: claude-sonnet-5.5"
+    },
+    {
+     "model_id": "claude-haiku-5.5",
+     "name": "Claude Haiku 5.5",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 0.1,
+     "output_price_per_million": 0.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.1,
+     "output_price_usd_per_million": 0.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Anthropic :: claude-haiku-5.5"
+    },
+    {
+     "model_id": "claude-fable-5.1",
+     "name": "Claude Fable 5.1",
+     "category": "reasoning",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 10.0,
+     "output_price_per_million": 50.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 10.0,
+     "output_price_usd_per_million": 50.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Anthropic :: claude-fable-5.1"
+    },
+    {
+     "model_id": "claude-sonnet-4.6",
+     "name": "Claude Sonnet 4.6",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 3.0,
+     "output_price_per_million": 15.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 3.0,
+     "output_price_usd_per_million": 15.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Anthropic :: claude-sonnet-4.6"
+    }
+   ],
+   "catalog_model_count": 15,
+   "pricing_status": "部分核验",
+   "pricing_note": "anthropic.com/pricing 取回 200，含 Claude 订阅计划价（Free / Pro / Max，Max 附 $100–$200/月 API credits），API 每百万 tokens 单价仍需 platform 控制台核验",
+   "latest_news_url": "https://www.anthropic.com/news"
+  },
+  {
+   "name": "Google Gemini",
+   "en_name": "Google (Gemini)",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://ai.google.dev/gemini-api/docs/pricing",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "gemini-4-argon",
+     "name": "Gemini 4 Argon",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Google Gemini :: gemini-4-argon"
+    },
+    {
+     "model_id": "gemini-3.8-flash",
+     "name": "Gemini 3.8 Flash",
+     "category": "multimodal",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 0.825,
+     "output_price_per_million": 4.125,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.825,
+     "output_price_usd_per_million": 4.125,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Google Gemini :: gemini-3.8-flash"
+    },
+    {
+     "model_id": "gemini-3.5-flash-lite",
+     "name": "Gemini 3.5 Flash-Lite",
+     "category": "multimodal",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 2.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.3,
+     "output_price_usd_per_million": 2.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Google Gemini :: gemini-3.5-flash-lite"
+    },
+    {
+     "model_id": "gemini-3-pro-image",
+     "name": "Gemini 3 Pro Image",
+     "category": "multimodal",
+     "context_length": 131072,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 12.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 12.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Google Gemini :: gemini-3-pro-image"
+    },
+    {
+     "model_id": "gemini-nano-banana-2.1",
+     "name": "Nano Banana 2.1（图像）",
+     "category": "multimodal",
+     "context_length": 65536,
+     "currency": "USD",
+     "input_price_per_million": 1.5,
+     "output_price_per_million": 7.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 1.5,
+     "output_price_usd_per_million": 7.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Google Gemini :: gemini-nano-banana-2.1"
+    }
+   ],
+   "catalog_model_count": 30,
+   "pricing_status": "不可核验（超时）",
+   "pricing_note": "ai.google.dev 本机连接超时（大陆不可直连）；数值取自 OpenRouter 目录价",
+   "latest_news_url": "https://blog.google/technology/ai/"
+  },
+  {
+   "name": "Mistral",
+   "en_name": "Mistral AI",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://docs.mistral.ai/getting-started/models/pricing",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "mistral-large-4",
+     "name": "Mistral Large 4",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 0.68,
+     "output_price_per_million": 2.09,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.68,
+     "output_price_usd_per_million": 2.09,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Mistral :: mistral-large-4"
+    },
+    {
+     "model_id": "mistral-large-2512",
+     "name": "Mistral Large 2512",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "USD",
+     "input_price_per_million": 0.5,
+     "output_price_per_million": 1.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.5,
+     "output_price_usd_per_million": 1.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Mistral :: mistral-large-2512"
+    },
+    {
+     "model_id": "mistral-medium-3.5",
+     "name": "Mistral Medium 3.5",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "USD",
+     "input_price_per_million": 1.5,
+     "output_price_per_million": 7.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 1.5,
+     "output_price_usd_per_million": 7.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Mistral :: mistral-medium-3.5"
+    },
+    {
+     "model_id": "mistral-small-2603",
+     "name": "Mistral Small 2603",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "USD",
+     "input_price_per_million": 0.15,
+     "output_price_per_million": 0.6,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.15,
+     "output_price_usd_per_million": 0.6,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Mistral :: mistral-small-2603"
+    },
+    {
+     "model_id": "devstral-2512",
+     "name": "Devstral 2512（代码）",
+     "category": "code",
+     "context_length": 262144,
+     "currency": "USD",
+     "input_price_per_million": 0.4,
+     "output_price_per_million": 2.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.4,
+     "output_price_usd_per_million": 2.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Mistral :: devstral-2512"
+    }
+   ],
+   "catalog_model_count": 20,
+   "pricing_status": "不可核验（超时）",
+   "pricing_note": "docs.mistral.ai / mistral.ai 本机连接超时；数值取自 OpenRouter 目录价",
+   "latest_news_url": "https://mistral.ai/news"
+  },
+  {
+   "name": "Cohere",
+   "en_name": "Cohere",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://docs.cohere.com/docs/models",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "command-a-plus-05-2026",
+     "name": "Command A+",
+     "category": "general",
+     "context_length": 192000,
+     "currency": "USD",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.3,
+     "output_price_usd_per_million": 1.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "Cohere · Docs / Models",
+       "url": "https://docs.cohere.com/docs/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "docs.cohere.com/docs/pricing 已 404"
+      }
+     ],
+     "cross_check": "双源（官方文档给型号与上下文，OpenRouter 给单价）",
+     "uid": "Cohere :: command-a-plus-05-2026"
+    },
+    {
+     "model_id": "command-a-03-2026",
+     "name": "Command A",
+     "category": "general",
+     "context_length": 256000,
+     "currency": "USD",
+     "input_price_per_million": 2.5,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.5,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "Cohere · Docs / Models",
+       "url": "https://docs.cohere.com/docs/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "docs.cohere.com/docs/pricing 已 404"
+      }
+     ],
+     "cross_check": "双源",
+     "uid": "Cohere :: command-a-03-2026"
+    },
+    {
+     "model_id": "command-r-plus-08-2024",
+     "name": "Command R+",
+     "category": "general",
+     "context_length": 128000,
+     "currency": "USD",
+     "input_price_per_million": 2.5,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.5,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Cohere :: command-r-plus-08-2024"
+    },
+    {
+     "model_id": "command-r7b-12-2024",
+     "name": "Command R7B",
+     "category": "general",
+     "context_length": 128000,
+     "currency": "USD",
+     "input_price_per_million": 0.0375,
+     "output_price_per_million": 0.15,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.0375,
+     "output_price_usd_per_million": 0.15,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Cohere :: command-r7b-12-2024"
+    }
+   ],
+   "catalog_model_count": 5,
+   "pricing_status": "部分核验",
+   "pricing_note": "docs.cohere.com/docs/models 可访问（模型/上下文/端点表），docs.cohere.com/docs/pricing 已 404，单价仅 OpenRouter 源",
+   "latest_news_url": "https://cohere.com/blog"
+  },
+  {
+   "name": "xAI",
+   "en_name": "xAI (Grok)",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://docs.x.ai/developers/models",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "grok-4.7",
+     "name": "Grok 4.7",
+     "category": "general",
+     "context_length": 500000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 6.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 6.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "xAI :: grok-4.7"
+    },
+    {
+     "model_id": "grok-4.5",
+     "name": "Grok 4.5",
+     "category": "general",
+     "context_length": 500000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 6.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 6.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "xAI :: grok-4.5"
+    },
+    {
+     "model_id": "grok-4.3",
+     "name": "Grok 4.3",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 1.25,
+     "output_price_per_million": 2.5,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 1.25,
+     "output_price_usd_per_million": 2.5,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "xAI :: grok-4.3"
+    },
+    {
+     "model_id": "grok-build-0.1",
+     "name": "Grok Build 0.1（代码）",
+     "category": "code",
+     "context_length": 256000,
+     "currency": "USD",
+     "input_price_per_million": 1.0,
+     "output_price_per_million": 2.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 1.0,
+     "output_price_usd_per_million": 2.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "xAI :: grok-build-0.1"
+    }
+   ],
+   "catalog_model_count": 7,
+   "pricing_status": "不可核验（超时）",
+   "pricing_note": "docs.x.ai / x.ai 本机连接超时；数值取自 OpenRouter 目录价",
+   "latest_news_url": "https://x.ai/news"
+  },
+  {
+   "name": "Groq",
+   "en_name": "Groq",
+   "region": "overseas",
+   "group": "overseas",
+   "china_access": "blocked",
+   "docs_url": "https://console.groq.com/docs/pricing",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "openai/gpt-oss-120b",
+     "name": "GPT-OSS 120B（Groq 托管）",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "USD",
+     "input_price_per_million": 0.15,
+     "output_price_per_million": 0.6,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.15,
+     "output_price_usd_per_million": 0.6,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "Groq :: openai/gpt-oss-120b"
+    }
+   ],
+   "catalog_model_count": 6,
+   "pricing_status": "不可核验",
+   "pricing_note": "docs.x.ai 类站外源超时；本行以 OpenRouter 目录价为唯一可取源",
+   "latest_news_url": "https://groq.com/newsroom/"
+  },
+  {
+   "name": "DeepSeek",
+   "en_name": "DeepSeek（深度求索）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://api-docs.deepseek.com/quick_start/pricing",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "deepseek-flash",
+     "name": "DeepSeek-V4.1-Flash-1017",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": 0.15,
+     "cache_hit_input_usd_per_million": 0.0211,
+     "input_price_usd_per_million": 0.0423,
+     "output_price_usd_per_million": 0.169,
+     "sources": [
+      {
+       "name": "DeepSeek API Docs · Models & Pricing",
+       "url": "https://api-docs.deepseek.com/quick_start/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "双源一致（目录价 0.3/1.2 USD 档为峰时折算）",
+     "peak_valley": {
+      "peak_multiplier": "峰时 ×2",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing",
+      "peak_prices": {
+       "input_cache_miss": 0.6,
+       "input_cache_hit": 0.3,
+       "output": 2.4
+      },
+      "valley_prices": {
+       "input_cache_miss": 0.3,
+       "input_cache_hit": 0.15,
+       "output": 1.2
+      },
+      "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "source_name": "DeepSeek",
+      "peak_windows": "北京时间 09:00-12:00 与 14:00-18:00（UTC 01:00-04:00、06:00-10:00，周一至周五，中国法定节假日除外）",
+      "valley_windows": "其余时段（含周末与法定节假日全天）",
+      "discount": "谷时段价格为峰时的 50%（半价）",
+      "tz": "厂商未注明（原文口径）"
+     },
+     "uid": "DeepSeek :: deepseek-flash"
+    },
+    {
+     "model_id": "deepseek-v4-pro",
+     "name": "DeepSeek-V4-Pro-0813",
+     "category": "reasoning",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 0.66,
+     "output_price_per_million": 1.98,
+     "cache_hit_input_per_million": 0.022,
+     "cache_hit_input_usd_per_million": 0.0031,
+     "input_price_usd_per_million": 0.093,
+     "output_price_usd_per_million": 0.2789,
+     "sources": [
+      {
+       "name": "DeepSeek API Docs · Models & Pricing",
+       "url": "https://api-docs.deepseek.com/quick_start/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源",
+     "peak_valley": {
+      "source": "https://api-docs.deepseek.com/quick_start/pricing",
+      "peak_prices": {
+       "input_cache_miss": 1.32,
+       "input_cache_hit": 0.044,
+       "output": 3.96
+      },
+      "valley_prices": {
+       "input_cache_miss": 0.66,
+       "input_cache_hit": 0.022,
+       "output": 1.98
+      },
+      "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "source_name": "DeepSeek",
+      "peak_windows": "同 DeepSeek 官方峰时（UTC 01-04、06-10 工作日）",
+      "valley_windows": "其余时段",
+      "discount": "谷时 = 峰时 × 50%",
+      "tz": "厂商未注明（原文口径）"
+     },
+     "uid": "DeepSeek :: deepseek-v4-pro"
+    },
+    {
+     "model_id": "deepseek-v3.2",
+     "name": "DeepSeek-V3.2（上一代）",
+     "category": "general",
+     "context_length": 163840,
+     "currency": "USD",
+     "input_price_per_million": 0.28,
+     "output_price_per_million": 0.42,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.28,
+     "output_price_usd_per_million": 0.42,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "note": "官方说明：legacy 名称 deepseek-v4-flash / -vision-exp 仍接受但模型已退役，请求由 V4.1-Flash-1017 承接并按 Flash 价计费",
+     "uid": "DeepSeek :: deepseek-v3.2"
+    }
+   ],
+   "catalog_model_count": 3,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "官方定价页本机可直连取回（HTTP 200），价格与峰谷规则均取自官方原文",
+   "latest_news_url": "https://api-docs.deepseek.com/news",
+   "note": "另有 Search / Fetch 独立 API：$0.75 每 1000 次成功请求；DeepSeek Harness 内测中，2026-11-01 00:00（北京时间）起服务端工具调用开始计费"
+  },
+  {
+   "name": "Kimi",
+   "en_name": "Kimi（月之暗面 Moonshot AI）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://platform.kimi.com/docs/pricing/chat.md",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "kimi-k3",
+     "name": "Kimi K3",
+     "category": "reasoning",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 20.0,
+     "output_price_per_million": 100.0,
+     "cache_hit_input_per_million": 2.0,
+     "cache_hit_input_usd_per_million": 0.2817,
+     "input_price_usd_per_million": 2.8169,
+     "output_price_usd_per_million": 14.0845,
+     "sources": [
+      {
+       "name": "Kimi 开放平台 · 模型推理价格说明",
+       "url": "https://platform.kimi.com/docs/pricing/chat.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "Kimi 开放平台 · 定价文档",
+       "url": "https://platform.moonshot.cn/docs/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致（官方文档，两域名同表）",
+     "note": "K3 缓存写入另计：TTL 5min ¥20／TTL 1h ¥40（每百万 tokens）；OpenRouter 目录价 0.239/11.936 疑为批量或促销档，口径差异大",
+     "peak_valley": {
+      "source": "https://platform.kimi.com/docs/pricing/chat.md",
+      "batch": {
+       "kimi-k2.7-code": {
+        "input_cache_miss": 3.9,
+        "input_cache_hit": 0.78,
+        "output": 16.2
+       },
+       "kimi-k2.6": {
+        "input_cache_miss": 3.9,
+        "input_cache_hit": 0.66,
+        "output": 16.2
+       }
+      },
+      "source_url": "https://platform.kimi.com/docs/pricing/chat.md",
+      "source_name": "Kimi",
+      "peak_windows": "官方未设峰谷计价",
+      "valley_windows": "全天统一价；可用批量推理（Batch）替代谷时段省钱",
+      "discount": "Batch API = 标准价 60%",
+      "tz": "厂商未注明（原文口径）"
+     },
+     "uid": "Kimi :: kimi-k3"
+    },
+    {
+     "model_id": "kimi-k2.7-code",
+     "name": "Kimi K2.7 Code",
+     "category": "code",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 6.5,
+     "output_price_per_million": 27.0,
+     "cache_hit_input_per_million": 1.3,
+     "cache_hit_input_usd_per_million": 0.1831,
+     "input_price_usd_per_million": 0.9155,
+     "output_price_usd_per_million": 3.8028,
+     "sources": [
+      {
+       "name": "Kimi 开放平台 · 模型推理价格说明",
+       "url": "https://platform.kimi.com/docs/pricing/chat.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致（硅基流动镜像 ¥6.5/¥27）",
+     "uid": "Kimi :: kimi-k2.7-code"
+    },
+    {
+     "model_id": "kimi-k2.7-code-highspeed",
+     "name": "Kimi K2.7 Code Highspeed",
+     "category": "code",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 13.0,
+     "output_price_per_million": 54.0,
+     "cache_hit_input_per_million": 2.6,
+     "cache_hit_input_usd_per_million": 0.3662,
+     "input_price_usd_per_million": 1.831,
+     "output_price_usd_per_million": 7.6056,
+     "sources": [
+      {
+       "name": "Kimi 开放平台 · 模型推理价格说明",
+       "url": "https://platform.kimi.com/docs/pricing/chat.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅官方源",
+     "uid": "Kimi :: kimi-k2.7-code-highspeed"
+    },
+    {
+     "model_id": "kimi-k2.6",
+     "name": "Kimi K2.6",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 6.5,
+     "output_price_per_million": 27.0,
+     "cache_hit_input_per_million": 1.1,
+     "cache_hit_input_usd_per_million": 0.1549,
+     "input_price_usd_per_million": 0.9155,
+     "output_price_usd_per_million": 3.8028,
+     "sources": [
+      {
+       "name": "Kimi 开放平台 · 模型推理价格说明",
+       "url": "https://platform.kimi.com/docs/pricing/chat.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "uid": "Kimi :: kimi-k2.6"
+    }
+   ],
+   "catalog_model_count": 4,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "platform.kimi.com / platform.moonshot.cn 本机均可直连取回 Markdown 定价表",
+   "latest_news_url": "https://platform.moonshot.cn/docs/news",
+   "note": "批量推理（Batch）不受实时并发限制，费用为标准价 60%，需 completion_window 内完成"
+  },
+  {
+   "name": "GLM",
+   "en_name": "GLM（智谱 Z.ai）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://open.bigmodel.cn/pricing",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "glm-5.3",
+     "name": "GLM-5.3",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 8.0,
+     "output_price_per_million": 28.0,
+     "cache_hit_input_per_million": 2.0,
+     "cache_hit_input_usd_per_million": 0.2817,
+     "input_price_usd_per_million": 1.1268,
+     "output_price_usd_per_million": 3.9437,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "智谱 BigModel · 定价页",
+       "url": "https://open.bigmodel.cn/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "前端渲染（需 JS/登录），本机仅取回空壳页，改用可检索镜像源交叉核对"
+      }
+     ],
+     "cross_check": "镜像价（官方页需 JS 渲染无法直取）",
+     "note": "智谱官网描述：GLM-5.3 前沿编程能力与涌现的网络安全能力，面向复杂软件工程与长程 Agent 任务，支持 1M 上下文",
+     "uid": "GLM :: glm-5.3"
+    },
+    {
+     "model_id": "glm-5.3-flash",
+     "name": "GLM-5.3 Flash",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 0.8,
+     "output_price_per_million": 2.8,
+     "cache_hit_input_per_million": 0.23,
+     "cache_hit_input_usd_per_million": 0.0324,
+     "input_price_usd_per_million": 0.1127,
+     "output_price_usd_per_million": 0.3944,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "智谱 BigModel · 定价页",
+       "url": "https://open.bigmodel.cn/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "前端渲染（需 JS/登录），本机仅取回空壳页，改用可检索镜像源交叉核对"
+      }
+     ],
+     "cross_check": "镜像价",
+     "note": "硅基流动 2026-10-15 上线 GLM-5.3-Flash 高速版（GLM-5 系列首款原生多模态）",
+     "uid": "GLM :: glm-5.3-flash"
+    },
+    {
+     "model_id": "glm-5.2",
+     "name": "GLM-5.2",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 8.0,
+     "output_price_per_million": 28.0,
+     "cache_hit_input_per_million": 2.0,
+     "cache_hit_input_usd_per_million": 0.2817,
+     "input_price_usd_per_million": 1.1268,
+     "output_price_usd_per_million": 3.9437,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "镜像价（阿里云百炼模型列表亦上架 GLM-5.2）",
+     "uid": "GLM :: glm-5.2"
+    },
+    {
+     "model_id": "glm-5.1-pro",
+     "name": "GLM-5.1 Pro（分段计价）",
+     "category": "reasoning",
+     "context_length": 204800,
+     "currency": "CNY",
+     "input_price_per_million": 6.0,
+     "output_price_per_million": 24.0,
+     "cache_hit_input_per_million": 1.3,
+     "cache_hit_input_usd_per_million": 0.1831,
+     "input_price_usd_per_million": 0.8451,
+     "output_price_usd_per_million": 3.3803,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅镜像源",
+     "note": "输入 [0,32k) ¥6/¥24/缓存¥1.3；输入 [32k,+∞) ¥8/¥28/缓存¥2.0",
+     "uid": "GLM :: glm-5.1-pro"
+    },
+    {
+     "model_id": "glm-5v-turbo",
+     "name": "GLM-5V-Turbo（多模态）",
+     "category": "multimodal",
+     "context_length": 202752,
+     "currency": "USD",
+     "input_price_per_million": 1.2,
+     "output_price_per_million": 4.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 1.2,
+     "output_price_usd_per_million": 4.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "智谱 Z.ai 官网 · 新闻/模型页",
+       "url": "https://www.zhipuai.cn/zh",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "note": "OpenRouter 标注上下文 202752，与官网「1M 上下文」口径存在差异",
+     "uid": "GLM :: glm-5v-turbo"
+    }
+   ],
+   "catalog_model_count": 16,
+   "pricing_status": "需 JS/登录",
+   "pricing_note": "open.bigmodel.cn/pricing 本机取回 200 但为前端空壳（需 JS + 登录），按约定改用国内可检索的硅基流动价格中心与阿里云百炼上架信息交叉核对",
+   "latest_news_url": "https://www.zhipuai.cn/news"
+  },
+  {
+   "name": "通义千问",
+   "en_name": "Qwen（阿里云百炼 Model Studio）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://help.aliyun.com/zh/model-studio/models",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "qwen3.8-max-0902",
+     "name": "Qwen3.8 Max",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 6.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 6.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "聚合价 + 官方上架确认（官方文档未直出单价）",
+     "note": "阿里云百炼文档列出 qwen3.8-max / qwen3.7-plus / qwen3.8-flash 等文本生成矩阵，覆盖图像、音频、视频与向量重排序",
+     "uid": "通义千问 :: qwen3.8-max-0902"
+    },
+    {
+     "model_id": "qwen3.8-max-prime",
+     "name": "Qwen3.8 Max Prime",
+     "category": "reasoning",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 4.0,
+     "output_price_per_million": 12.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 4.0,
+     "output_price_usd_per_million": 12.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "通义千问 :: qwen3.8-max-prime"
+    },
+    {
+     "model_id": "qwen3.8-flash",
+     "name": "Qwen3.8 Flash",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 0.15,
+     "output_price_per_million": 0.47,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.15,
+     "output_price_usd_per_million": 0.47,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "聚合价 + 官方上架确认",
+     "uid": "通义千问 :: qwen3.8-flash"
+    },
+    {
+     "model_id": "qwen3.8-omni-flash",
+     "name": "Qwen3.8 Omni Flash（全模态）",
+     "category": "multimodal",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 0.15,
+     "output_price_per_million": 0.47,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.15,
+     "output_price_usd_per_million": 0.47,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "聚合价 + 官方上架确认",
+     "note": "官方：音视频分析与文本生成用 qwen3.8-omni-flash（Chat Completions / Responses）；实时音视频对话用 qwen3.8-omni-flash-realtime；离线语音输出用 qwen3.5-omni-plus",
+     "uid": "通义千问 :: qwen3.8-omni-flash"
+    },
+    {
+     "model_id": "qwen3.7-plus",
+     "name": "Qwen3.7 Plus",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 0.32,
+     "output_price_per_million": 1.28,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.32,
+     "output_price_usd_per_million": 1.28,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "聚合价 + 官方上架确认",
+     "uid": "通义千问 :: qwen3.7-plus"
+    },
+    {
+     "model_id": "Qwen/Qwen3.8-27B",
+     "name": "Qwen3.8-27B（开源权重）",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 3.0,
+     "output_price_per_million": 12.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.4225,
+     "output_price_usd_per_million": 1.6901,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "镜像价",
+     "note": "同一开源权重模型在硅基流动为 ¥3/¥12，与官方按量目录价口径不同（自建 vs 托管）",
+     "uid": "通义千问 :: Qwen/Qwen3.8-27B"
+    }
+   ],
+   "catalog_model_count": 42,
+   "pricing_status": "部分核验",
+   "pricing_note": "help.aliyun.com 与 alibabacloud.com 文档本机可直连（200），取到模型矩阵与能力说明；每百万 tokens 单价表位于控制台定价页，未匿名取回",
+   "latest_news_url": "https://help.aliyun.com/zh/model-studio/release-notes",
+   "note": "百炼同时上架第三方模型：deepseek-v4-pro-0813、deepseek-v4.1-flash、kimi-k3、glm-5.2、ZHIPU/GLM-5.3、MiniMax-M3、mimo-v2.5-pro"
+  },
+  {
+   "name": "豆包",
+   "en_name": "Doubao / Seed（火山方舟 VeRL-Ark）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://www.volcengine.com/docs/82379/109932",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "doubao-seed-2-5",
+     "name": "Doubao Seed 2.5",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 0.8,
+     "output_price_per_million": 2.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.1127,
+     "output_price_usd_per_million": 0.2817,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "火山方舟 · 模型价格",
+       "url": "https://www.volcengine.com/docs/82379/1544106",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "页面需登录/前端渲染，未取到官方单价"
+      }
+     ],
+     "cross_check": "仅聚合源（方舟价格页需登录）",
+     "note": "方舟文档中心可取回模型列表（Seed-Evolving、DeepSeek-V4.1-Flash 上架 1017 版本），model-pricing 页返回占位内容",
+     "uid": "豆包 :: doubao-seed-2-5"
+    },
+    {
+     "model_id": "doubao-seedance-2-5",
+     "name": "Doubao Seedance 2.5（视频生成）",
+     "category": "video",
+     "context_length": 0,
+     "currency": "CNY",
+     "input_price_per_million": null,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": null,
+     "output_price_usd_per_million": null,
+     "sources": [
+      {
+       "name": "火山方舟 · 文档中心（模型列表/价格入口）",
+       "url": "https://www.volcengine.com/docs/82379/109932",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "按秒/条计费，不适用 tokens 单价",
+     "uid": "豆包 :: doubao-seedance-2-5"
+    },
+    {
+     "model_id": "doubao-seedream-5.0-pro",
+     "name": "Doubao Seedream 5.0 Pro / flash（图像生成）",
+     "category": "image",
+     "context_length": 0,
+     "currency": "CNY",
+     "input_price_per_million": null,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": null,
+     "output_price_usd_per_million": null,
+     "sources": [
+      {
+       "name": "火山方舟 · 文档中心（模型列表/价格入口）",
+       "url": "https://www.volcengine.com/docs/82379/109932",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "按张计费，不适用 tokens 单价",
+     "uid": "豆包 :: doubao-seedream-5.0-pro"
+    },
+    {
+     "model_id": "ByteDance-Seed/Seed-OSS-36B-Instruct",
+     "name": "Seed-OSS 36B Instruct（开源）",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "CNY",
+     "input_price_per_million": 1.5,
+     "output_price_per_million": 4.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.2113,
+     "output_price_usd_per_million": 0.5634,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "镜像价",
+     "uid": "豆包 :: ByteDance-Seed/Seed-OSS-36B-Instruct"
+    }
+   ],
+   "catalog_model_count": 24,
+   "pricing_status": "文档可达、价格需登录",
+   "pricing_note": "www.volcengine.com 文档中心本机可直连（200，189 KB），但 82379/1544106 模型价格页与 pricing 页仅返回渲染占位（需登录控制台）",
+   "latest_news_url": "https://www.volcengine.com/product/doubao"
+  },
+  {
+   "name": "MiniMax",
+   "en_name": "MiniMax（稀宇科技）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://platform.minimaxi.com/document/pricing",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "MiniMax-M3.1-Flash",
+     "name": "MiniMax M3.1 Flash",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 1.0,
+     "output_price_per_million": 4.0,
+     "cache_hit_input_per_million": 0.1,
+     "cache_hit_input_usd_per_million": 0.0141,
+     "input_price_usd_per_million": 0.1408,
+     "output_price_usd_per_million": 0.5634,
+     "sources": [
+      {
+       "name": "MiniMax · 产品定价/发布说明",
+       "url": "https://platform.minimaxi.com/document/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "双源（官方文档声明 ¥1/¥4/缓存¥0.1；OpenRouter 目录 0.3/1.2 USD）",
+     "note": "官方原文：输入每百万 1 元、输出每百万 4 元、缓存读取每百万 0.1 元；采用更激进稀疏注意力，日常输出 200+ TPS（P50 170+），Agentic 任务综合成本较前代降 70%",
+     "uid": "MiniMax :: MiniMax-M3.1-Flash"
+    },
+    {
+     "model_id": "minimax-m3",
+     "name": "MiniMax M3",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.3,
+     "output_price_usd_per_million": 1.2,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "MiniMax · 产品定价/发布说明",
+       "url": "https://platform.minimaxi.com/document/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "MiniMax :: minimax-m3"
+    },
+    {
+     "model_id": "MiniMax-H3",
+     "name": "MiniMax H3（全模态生成）",
+     "category": "multimodal",
+     "context_length": 0,
+     "currency": "CNY",
+     "input_price_per_million": null,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": null,
+     "output_price_usd_per_million": null,
+     "sources": [
+      {
+       "name": "MiniMax · 产品定价/发布说明",
+       "url": "https://platform.minimaxi.com/document/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "按生成量计费，不适用 tokens 单价",
+     "note": "官方：通用全模态生成模型，统一理解文本/图像/视频/声音，输出原生双声道音视频，最高 15s 2K 分辨率；2K 用基模 in-context 重生成替代专用超分",
+     "uid": "MiniMax :: MiniMax-H3"
+    },
+    {
+     "model_id": "minimax-m2.7",
+     "name": "MiniMax M2.7",
+     "category": "general",
+     "context_length": 204800,
+     "currency": "USD",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.3,
+     "output_price_usd_per_million": 1.2,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "MiniMax :: minimax-m2.7"
+    }
+   ],
+   "catalog_model_count": 8,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "platform.minimaxi.com / minimaxi.com 文档本机可直连（200，109 KB 正文含定价段落）",
+   "latest_news_url": "https://www.minimaxi.com/news"
+  },
+  {
+   "name": "StepFun",
+   "en_name": "StepFun（阶跃星辰）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "step-5-preview",
+     "name": "Step 5 Preview",
+     "category": "reasoning",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 7.0,
+     "output_price_per_million": 20.0,
+     "cache_hit_input_per_million": 0.7,
+     "cache_hit_input_usd_per_million": 0.0986,
+     "input_price_usd_per_million": 0.9859,
+     "output_price_usd_per_million": 2.8169,
+     "sources": [
+      {
+       "name": "阶跃星辰 · API 定价",
+       "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "阶跃星辰 · Step 5 Preview 调价公告",
+       "url": "https://platform.stepfun.com/docs/zh/announcements/step-5-preview-price-adjustment.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致（定价表 + 调价公告）",
+     "note": "2026-10-14 00:30（北京时间）起缓存命中输入由 ¥0.35 → ¥0.70；此前已按量调用过的用户沿用 ¥0.35；Step Plan 接入地址不在调整范围",
+     "uid": "StepFun :: step-5-preview"
+    },
+    {
+     "model_id": "step-3.7-flash",
+     "name": "Step 3.7 Flash",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 1.35,
+     "output_price_per_million": 8.1,
+     "cache_hit_input_per_million": 0.27,
+     "cache_hit_input_usd_per_million": 0.038,
+     "input_price_usd_per_million": 0.1901,
+     "output_price_usd_per_million": 1.1408,
+     "sources": [
+      {
+       "name": "阶跃星辰 · API 定价",
+       "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源（硅基流动为 Step-3.5-Flash 档 ¥0.7/¥2.1）",
+     "uid": "StepFun :: step-3.7-flash"
+    },
+    {
+     "model_id": "step-3.5-flash",
+     "name": "Step 3.5 Flash",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 0.7,
+     "output_price_per_million": 2.1,
+     "cache_hit_input_per_million": 0.14,
+     "cache_hit_input_usd_per_million": 0.0197,
+     "input_price_usd_per_million": 0.0986,
+     "output_price_usd_per_million": 0.2958,
+     "sources": [
+      {
+       "name": "阶跃星辰 · API 定价",
+       "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "uid": "StepFun :: step-3.5-flash"
+    },
+    {
+     "model_id": "step-1o-turbo-vision",
+     "name": "Step 1o Turbo Vision",
+     "category": "multimodal",
+     "context_length": 32768,
+     "currency": "CNY",
+     "input_price_per_million": 2.5,
+     "output_price_per_million": 8.0,
+     "cache_hit_input_per_million": 0.5,
+     "cache_hit_input_usd_per_million": 0.0704,
+     "input_price_usd_per_million": 0.3521,
+     "output_price_usd_per_million": 1.1268,
+     "sources": [
+      {
+       "name": "阶跃星辰 · API 定价",
+       "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅官方源",
+     "uid": "StepFun :: step-1o-turbo-vision"
+    },
+    {
+     "model_id": "stepaudio-2.5-chat",
+     "name": "StepAudio 2.5 Chat（语音）",
+     "category": "audio",
+     "context_length": 32768,
+     "currency": "CNY",
+     "input_price_per_million": 10.0,
+     "output_price_per_million": 25.0,
+     "cache_hit_input_per_million": 2.0,
+     "cache_hit_input_usd_per_million": 0.2817,
+     "input_price_usd_per_million": 1.4085,
+     "output_price_usd_per_million": 3.5211,
+     "sources": [
+      {
+       "name": "阶跃星辰 · API 定价",
+       "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅官方源",
+     "note": "stepaudio-3-realtime-preview / chat-preview 限时免费；TTS 按字符（stepaudio-3-tts ¥2.5/万字符）",
+     "uid": "StepFun :: stepaudio-2.5-chat"
+    }
+   ],
+   "catalog_model_count": 3,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "platform.stepfun.com 文档为 Mintlify 托管，本机可直连并取回 Markdown 原文（含完整价格表）",
+   "latest_news_url": "https://www.stepfun.com/blog",
+   "note": "增值能力：互联网搜索 ¥0.04/次、文搜图 ¥0.12/次、文件存储 ¥0.5/GB/天；platform.stepfun.com/docs/pricing/overview 旧路径已 404，改用 /docs/zh/guides/pricing/details.md"
+  },
+  {
+   "name": "ZeroOne",
+   "en_name": "ZeroOne（零一万物）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://platform.lingyiwanwu.com/docs",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "yi-lightning",
+     "name": "Yi-Lightning",
+     "category": "general",
+     "context_length": 16000,
+     "currency": "USD",
+     "input_price_per_million": null,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": null,
+     "output_price_usd_per_million": null,
+     "sources": [
+      {
+       "name": "机器之心 · 资讯站",
+       "url": "https://www.jiqizhixin.com/",
+       "kind": "news",
+       "as_of": "2026-10-20",
+       "note": "正文需 JS 渲染，本站仅作资讯入口"
+      }
+     ],
+     "cross_check": "无可核验源",
+     "note": "platform.lingyiwanwu.com/pricing 与 /docs/pricing 均 404，www.yi.com 解析失败（getaddrinfo failed），官网改版后未公开定价",
+     "uid": "ZeroOne :: yi-lightning"
+    },
+    {
+     "model_id": "yi-vision",
+     "name": "Yi-Vision（多模态）",
+     "category": "multimodal",
+     "context_length": 16000,
+     "currency": "USD",
+     "input_price_per_million": null,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": null,
+     "output_price_usd_per_million": null,
+     "sources": [
+      {
+       "name": "机器之心 · 资讯站",
+       "url": "https://www.jiqizhixin.com/",
+       "kind": "news",
+       "as_of": "2026-10-20",
+       "note": "正文需 JS 渲染，本站仅作资讯入口"
+      }
+     ],
+     "cross_check": "无可核验源",
+     "uid": "ZeroOne :: yi-vision"
+    }
+   ],
+   "catalog_model_count": 2,
+   "pricing_status": "不可核验",
+   "pricing_note": "官网定价页 404 + 旧域名解析失败；模型与价格仅能经机器之心等第三方资讯站确认存在性",
+   "latest_news_url": "https://www.jiqizhixin.com/",
+   "note": "建议站点标注「官网定价暂未公开，价格栏留空」而非沿用旧缓存价"
+  },
+  {
+   "name": "腾讯混元",
+   "en_name": "Tencent Hunyuan（腾讯云）",
+   "region": "china",
+   "group": "china",
+   "china_access": "unrestricted",
+   "docs_url": "https://cloud.tencent.com/document/product/1758/101818",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "hunyuan-a13b",
+     "name": "Hunyuan A13B Instruct",
+     "category": "general",
+     "context_length": 32768,
+     "currency": "CNY",
+     "input_price_per_million": 1.0,
+     "output_price_per_million": 4.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.1408,
+     "output_price_usd_per_million": 0.5634,
+     "sources": [
+      {
+       "name": "腾讯云 · 混元大模型计费文档",
+       "url": "https://cloud.tencent.com/document/product/1758/101818",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "peak_valley": {
+      "source": "https://cloud.tencent.com/document/product/1758/101818",
+      "peak_prices": {
+       "input": 1.0,
+       "output": 4.0
+      },
+      "valley_prices": {
+       "input": 0.8,
+       "output": 3.2
+      },
+      "source_url": "https://cloud.tencent.com/document/product/1758/101818",
+      "source_name": "腾讯混元",
+      "peak_windows": "09:00-18:00 北京时间",
+      "valley_windows": "00:00-09:00 与 18:00-24:00 北京时间",
+      "discount": "谷时段 −20%（谷档 ¥0.8/¥3.2）",
+      "tz": "厂商未注明（原文口径）"
+     },
+     "uid": "腾讯混元 :: hunyuan-a13b"
+    },
+    {
+     "model_id": "hy4-preview",
+     "name": "Hunyuan Hy4 preview",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "CNY",
+     "input_price_per_million": 6.0,
+     "output_price_per_million": 18.0,
+     "cache_hit_input_per_million": 0.3,
+     "cache_hit_input_usd_per_million": 0.0423,
+     "input_price_usd_per_million": 0.8451,
+     "output_price_usd_per_million": 2.5352,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "腾讯云 · 混元大模型计费文档",
+       "url": "https://cloud.tencent.com/document/product/1758/101818",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "镜像价 + 官方计费文档可核验",
+     "uid": "腾讯混元 :: hy4-preview"
+    },
+    {
+     "model_id": "hunyuan-mt-7b",
+     "name": "Hunyuan MT 7B（翻译）",
+     "category": "general",
+     "context_length": 32768,
+     "currency": "CNY",
+     "input_price_per_million": 0.0,
+     "output_price_per_million": 0.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.0,
+     "output_price_usd_per_million": 0.0,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "免费额度",
+     "uid": "腾讯混元 :: hunyuan-mt-7b"
+    }
+   ],
+   "catalog_model_count": 20,
+   "pricing_status": "部分核验",
+   "pricing_note": "cloud.tencent.com/document/product/1758/101818 本机可直连取回（9.3 KB），含混元计费说明；具体到每张卡的现价以控制台为准",
+   "latest_news_url": "https://cloud.tencent.com/document/product/1729/97731"
+  },
+  {
+   "name": "SiliconFlow",
+   "en_name": "SiliconFlow（硅基流动）",
+   "region": "china",
+   "group": "china_aggregate",
+   "china_access": "unrestricted",
+   "docs_url": "https://siliconflow.cn/pricing",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "deepseek-ai/DeepSeek-V4.1-Flash",
+     "name": "DeepSeek V4.1 Flash（谷档价）",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 8.0,
+     "cache_hit_input_per_million": 0.04,
+     "cache_hit_input_usd_per_million": 0.0056,
+     "input_price_usd_per_million": 0.2817,
+     "output_price_usd_per_million": 1.1268,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "DeepSeek API Docs · Models & Pricing",
+       "url": "https://api-docs.deepseek.com/quick_start/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源（与官方峰谷规则对应）",
+     "peak_valley": {
+      "source": "https://siliconflow.cn/pricing",
+      "peak_prices": {
+       "input": 1.0,
+       "output": 4.0,
+       "cache": 0.02
+      },
+      "valley_prices": {
+       "input": 2.0,
+       "output": 8.0,
+       "cache": 0.04
+      },
+      "note": "硅基流动把「费用发生时段」标在每格价格上，与 DeepSeek 官方峰谷定义方向相反，采购前务必核对",
+      "source_url": "https://siliconflow.cn/pricing",
+      "source_name": "SiliconFlow",
+      "peak_windows": "02:00-08:00 北京时间",
+      "valley_windows": "00:00-02:00 与 08:00-24:00 北京时间",
+      "discount": "谷档 ¥2/¥8/¥0.04；峰档 ¥1/¥4/¥0.02（峰档单价更低，用于错峰）",
+      "tz": "厂商未注明（原文口径）"
+     },
+     "uid": "SiliconFlow :: deepseek-ai/DeepSeek-V4.1-Flash"
+    },
+    {
+     "model_id": "deepseek-ai/DeepSeek-V4-Flash",
+     "name": "DeepSeek V4 Flash（旧版，谷档）",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 1.5,
+     "output_price_per_million": 4.5,
+     "cache_hit_input_per_million": 0.15,
+     "cache_hit_input_usd_per_million": 0.0211,
+     "input_price_usd_per_million": 0.2113,
+     "output_price_usd_per_million": 0.6338,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "DeepSeek API Docs · Models & Pricing",
+       "url": "https://api-docs.deepseek.com/quick_start/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源",
+     "peak_valley": {
+      "source": "https://siliconflow.cn/pricing",
+      "peak_prices": {
+       "input": 2.25,
+       "output": 6.75,
+       "cache": 0.225
+      },
+      "valley_prices": {
+       "input": 1.5,
+       "output": 4.5,
+       "cache": 0.15
+      },
+      "source_url": "https://siliconflow.cn/pricing",
+      "source_name": "SiliconFlow",
+      "peak_windows": "02:00-08:00",
+      "valley_windows": "00:00-02:00 与 08:00-24:00",
+      "discount": "谷档 −33%",
+      "tz": "厂商未注明（原文口径）"
+     },
+     "uid": "SiliconFlow :: deepseek-ai/DeepSeek-V4-Flash"
+    },
+    {
+     "model_id": "deepseek-ai/DeepSeek-V4-Pro",
+     "name": "DeepSeek V4 Pro",
+     "category": "reasoning",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 12.0,
+     "output_price_per_million": 24.0,
+     "cache_hit_input_per_million": 1.0,
+     "cache_hit_input_usd_per_million": 0.1408,
+     "input_price_usd_per_million": 1.6901,
+     "output_price_usd_per_million": 3.3803,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "DeepSeek API Docs · Models & Pricing",
+       "url": "https://api-docs.deepseek.com/quick_start/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源",
+     "uid": "SiliconFlow :: deepseek-ai/DeepSeek-V4-Pro"
+    },
+    {
+     "model_id": "deepseek-ai/DeepSeek-V3.2",
+     "name": "DeepSeek V3.2",
+     "category": "general",
+     "context_length": 163840,
+     "currency": "CNY",
+     "input_price_per_million": 4.0,
+     "output_price_per_million": 6.0,
+     "cache_hit_input_per_million": 0.4,
+     "cache_hit_input_usd_per_million": 0.0563,
+     "input_price_usd_per_million": 0.5634,
+     "output_price_usd_per_million": 0.8451,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "SiliconFlow :: deepseek-ai/DeepSeek-V3.2"
+    },
+    {
+     "model_id": "zai-org/GLM-5.3-Flash",
+     "name": "GLM-5.3 Flash（高速版）",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 0.8,
+     "output_price_per_million": 2.8,
+     "cache_hit_input_per_million": 0.23,
+     "cache_hit_input_usd_per_million": 0.0324,
+     "input_price_usd_per_million": 0.1127,
+     "output_price_usd_per_million": 0.3944,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "智谱 BigModel · 定价页",
+       "url": "https://open.bigmodel.cn/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "前端渲染（需 JS/登录），本机仅取回空壳页，改用可检索镜像源交叉核对"
+      }
+     ],
+     "cross_check": "镜像价（官方页需 JS）",
+     "note": "2026-10-15 上线，硅基流动动态页公告「GLM-5 系列首款原生多模态模型」",
+     "uid": "SiliconFlow :: zai-org/GLM-5.3-Flash"
+    },
+    {
+     "model_id": "zai-org/GLM-5.3",
+     "name": "GLM-5.3",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 8.0,
+     "output_price_per_million": 28.0,
+     "cache_hit_input_per_million": 2.0,
+     "cache_hit_input_usd_per_million": 0.2817,
+     "input_price_usd_per_million": 1.1268,
+     "output_price_usd_per_million": 3.9437,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "智谱 Z.ai 官网 · 新闻/模型页",
+       "url": "https://www.zhipuai.cn/zh",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "镜像价 + 官网能力描述交叉核对",
+     "uid": "SiliconFlow :: zai-org/GLM-5.3"
+    },
+    {
+     "model_id": "moonshotai/Kimi-K2.7-Code",
+     "name": "Kimi K2.7 Code（镜像）",
+     "category": "code",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 6.5,
+     "output_price_per_million": 27.0,
+     "cache_hit_input_per_million": 1.3,
+     "cache_hit_input_usd_per_million": 0.1831,
+     "input_price_usd_per_million": 0.9155,
+     "output_price_usd_per_million": 3.8028,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "Kimi 开放平台 · 模型推理价格说明",
+       "url": "https://platform.kimi.com/docs/pricing/chat.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "uid": "SiliconFlow :: moonshotai/Kimi-K2.7-Code"
+    },
+    {
+     "model_id": "Qwen/Qwen3.8-27B",
+     "name": "Qwen 3.8 27B（开源托管）",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 3.0,
+     "output_price_per_million": 12.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.4225,
+     "output_price_usd_per_million": 1.6901,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "Qwen Blog",
+       "url": "https://qwenlm.github.io/blog/",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "镜像价",
+     "uid": "SiliconFlow :: Qwen/Qwen3.8-27B"
+    },
+    {
+     "model_id": "stepfun-ai/Step-3.5-Flash",
+     "name": "Step 3.5 Flash（镜像）",
+     "category": "general",
+     "context_length": 262144,
+     "currency": "CNY",
+     "input_price_per_million": 0.7,
+     "output_price_per_million": 2.1,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.0986,
+     "output_price_usd_per_million": 0.2958,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "阶跃星辰 · API 定价",
+       "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "uid": "SiliconFlow :: stepfun-ai/Step-3.5-Flash"
+    },
+    {
+     "model_id": "meituan-longcat/LongCat-2.0",
+     "name": "LongCat 2.0（美团）",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "CNY",
+     "input_price_per_million": 5.0,
+     "output_price_per_million": 20.0,
+     "cache_hit_input_per_million": 0.1,
+     "cache_hit_input_usd_per_million": 0.0141,
+     "input_price_usd_per_million": 0.7042,
+     "output_price_usd_per_million": 2.8169,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "SiliconFlow :: meituan-longcat/LongCat-2.0"
+    },
+    {
+     "model_id": "ChinaTelecom/Xing4.0-29B",
+     "name": "Xing 4.0 29B（中国电信星辰）",
+     "category": "general",
+     "context_length": 32768,
+     "currency": "CNY",
+     "input_price_per_million": 0.0,
+     "output_price_per_million": 0.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.0,
+     "output_price_usd_per_million": 0.0,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "免费档",
+     "uid": "SiliconFlow :: ChinaTelecom/Xing4.0-29B"
+    },
+    {
+     "model_id": "tencent/Hy4-preview",
+     "name": "Hunyuan Hy4 preview（镜像）",
+     "category": "general",
+     "context_length": 131072,
+     "currency": "CNY",
+     "input_price_per_million": 6.0,
+     "output_price_per_million": 18.0,
+     "cache_hit_input_per_million": 0.3,
+     "cache_hit_input_usd_per_million": 0.0423,
+     "input_price_usd_per_million": 0.8451,
+     "output_price_usd_per_million": 2.5352,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "腾讯云 · 混元大模型计费文档",
+       "url": "https://cloud.tencent.com/document/product/1758/101818",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "peak_valley": {
+      "source": "https://siliconflow.cn/pricing",
+      "source_url": "https://siliconflow.cn/pricing",
+      "source_name": "SiliconFlow",
+      "peak_windows": "09:00-18:00",
+      "valley_windows": "00:00-09:00 与 18:00-24:00",
+      "discount": "谷档 −20%",
+      "tz": "厂商未注明（原文口径）"
+     },
+     "uid": "SiliconFlow :: tencent/Hy4-preview"
+    },
+    {
+     "model_id": "BAAI/bge-m3",
+     "name": "bge-m3（向量）",
+     "category": "embedding",
+     "context_length": 8192,
+     "currency": "CNY",
+     "input_price_per_million": 0.0,
+     "output_price_per_million": 0.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.0,
+     "output_price_usd_per_million": 0.0,
+     "sources": [
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "免费档",
+     "uid": "SiliconFlow :: BAAI/bge-m3"
+    }
+   ],
+   "catalog_model_count": 40,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "siliconflow.cn/pricing 本机可直连取回完整价格中心（实时同步各厂商价，含峰谷时段列）",
+   "latest_news_url": "https://siliconflow.cn/news",
+   "note": "docs.siliconflow.cn/cn/userguide/pricing 已 404，正确入口为 siliconflow.cn/pricing"
+  },
+  {
+   "name": "OpenRouter",
+   "en_name": "OpenRouter（海外聚合网关）",
+   "region": "overseas",
+   "group": "overseas_aggregate",
+   "china_access": "restricted",
+   "docs_url": "https://openrouter.ai/api/v1/models",
+   "has_official_cn_source": false,
+   "models": [
+    {
+     "model_id": "openrouter/auto",
+     "name": "Auto Router（自动选模）",
+     "category": "general",
+     "context_length": null,
+     "currency": "USD",
+     "input_price_per_million": null,
+     "output_price_per_million": null,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": null,
+     "output_price_usd_per_million": null,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "按所选模型计费",
+     "uid": "OpenRouter :: openrouter/auto"
+    },
+    {
+     "model_id": "anthropic/claude-sonnet-5.5",
+     "name": "Claude Sonnet 5.5（经 OpenRouter）",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "Anthropic · Plans & pricing",
+       "url": "https://www.anthropic.com/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "可取回 200，但仅订阅价（Free/Pro/Max），无 API 单价表"
+      }
+     ],
+     "cross_check": "双源一致",
+     "note": "含 OpenRouter 平台附加费；批量档（batch）为 1.0/5.0",
+     "uid": "OpenRouter :: anthropic/claude-sonnet-5.5"
+    },
+    {
+     "model_id": "openai/gpt-6.1-sol-pro",
+     "name": "GPT-6.1 Sol Pro（经 OpenRouter）",
+     "category": "reasoning",
+     "context_length": 1050000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "OpenAI · 定价页",
+       "url": "https://platform.openai.com/docs/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": "本机返回 HTTP 403（地区/反爬限制），未能核验官方单价"
+      }
+     ],
+     "cross_check": "仅聚合源（官方 403）",
+     "note": "OpenAI 官方页 403，此为国内可取的唯一来源",
+     "uid": "OpenRouter :: openai/gpt-6.1-sol-pro"
+    },
+    {
+     "model_id": "google/gemini-4-argon",
+     "name": "Gemini 4 Argon（经 OpenRouter）",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 10.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 10.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "note": "批量档 batch 1.0/5.0",
+     "uid": "OpenRouter :: google/gemini-4-argon"
+    },
+    {
+     "model_id": "x-ai/grok-4.7",
+     "name": "Grok 4.7（经 OpenRouter）",
+     "category": "general",
+     "context_length": 500000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 6.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 6.0,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "仅聚合源",
+     "uid": "OpenRouter :: x-ai/grok-4.7"
+    },
+    {
+     "model_id": "moonshotai/kimi-k3",
+     "name": "Kimi K3（经 OpenRouter）",
+     "category": "reasoning",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 0.239,
+     "output_price_per_million": 11.936,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.239,
+     "output_price_usd_per_million": 11.936,
+     "sources": [
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      },
+      {
+       "name": "Kimi 开放平台 · 模型推理价格说明",
+       "url": "https://platform.kimi.com/docs/pricing/chat.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "口径差异极大",
+     "note": "官方 CNY ¥20/¥100 约合 $2.8/$14；OpenRouter 目录价低一个量级，疑为批量/促销档，采购前需核实",
+     "uid": "OpenRouter :: moonshotai/kimi-k3"
+    }
+   ],
+   "catalog_model_count": 470,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "OpenRouter catalog API 本机可直连（200，470 个模型，JSON 含 pricing/context/supported_parameters）",
+   "latest_news_url": "https://openrouter.ai/announcements",
+   "note": "平台侧能力：Batch API 半价（2026-09-22 公告）、In-Region Routing 美/欧分区（2026-09-09）、Private Endpoints（2026-10-14）、OpenRouter 并入 Stripe（2026-10-14）"
+  },
+  {
+   "name": "阿里云百炼",
+   "en_name": "Aliyun Bailian Model Studio（模型广场/聚合）",
+   "region": "china",
+   "group": "china_aggregate",
+   "china_access": "unrestricted",
+   "docs_url": "https://help.aliyun.com/zh/model-studio/models",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "qwen3.8-max",
+     "name": "Qwen3.8 Max（广场）",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "USD",
+     "input_price_per_million": 2.0,
+     "output_price_per_million": 6.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.0,
+     "output_price_usd_per_million": 6.0,
+     "sources": [
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "上架确认 + 聚合价",
+     "uid": "阿里云百炼 :: qwen3.8-max"
+    },
+    {
+     "model_id": "deepseek-v4.1-flash",
+     "name": "DeepSeek V4.1 Flash（广场）",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "CNY",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.0423,
+     "output_price_usd_per_million": 0.169,
+     "sources": [
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "DeepSeek API Docs · Models & Pricing",
+       "url": "https://api-docs.deepseek.com/quick_start/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "uid": "阿里云百炼 :: deepseek-v4.1-flash"
+    },
+    {
+     "model_id": "kimi/kimi-k3",
+     "name": "Kimi K3（广场）",
+     "category": "reasoning",
+     "context_length": 1000000,
+     "currency": "CNY",
+     "input_price_per_million": 20.0,
+     "output_price_per_million": 100.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 2.8169,
+     "output_price_usd_per_million": 14.0845,
+     "sources": [
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "Kimi 开放平台 · 模型推理价格说明",
+       "url": "https://platform.kimi.com/docs/pricing/chat.md",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "uid": "阿里云百炼 :: kimi/kimi-k3"
+    },
+    {
+     "model_id": "ZHIPU/GLM-5.3",
+     "name": "GLM-5.3（广场）",
+     "category": "general",
+     "context_length": 1000000,
+     "currency": "CNY",
+     "input_price_per_million": 8.0,
+     "output_price_per_million": 28.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 1.1268,
+     "output_price_usd_per_million": 3.9437,
+     "sources": [
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "硅基流动 · 模型价格中心",
+       "url": "https://siliconflow.cn/pricing",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "uid": "阿里云百炼 :: ZHIPU/GLM-5.3"
+    },
+    {
+     "model_id": "MiniMax-M3",
+     "name": "MiniMax M3（广场）",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "USD",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.3,
+     "output_price_usd_per_million": 1.2,
+     "sources": [
+      {
+       "name": "阿里云百炼 · 模型大全功能规格与计费",
+       "url": "https://help.aliyun.com/zh/model-studio/models",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "MiniMax · 产品定价/发布说明",
+       "url": "https://platform.minimaxi.com/document/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "上架确认 + 聚合价",
+     "uid": "阿里云百炼 :: MiniMax-M3"
+    }
+   ],
+   "catalog_model_count": 42,
+   "pricing_status": "可核验（官方直连）",
+   "pricing_note": "help.aliyun.com 与 alibabacloud.com/help/zh 本机均可直连（200），取到完整模型矩阵；广场单价以控制台计费页为准",
+   "latest_news_url": "https://help.aliyun.com/zh/model-studio/release-notes"
+  },
+  {
+   "name": "火山方舟",
+   "en_name": "Volcengine Ark（方舟模型广场/聚合）",
+   "region": "china",
+   "group": "china_aggregate",
+   "china_access": "unrestricted",
+   "docs_url": "https://www.volcengine.com/docs/82379/109932",
+   "has_official_cn_source": true,
+   "models": [
+    {
+     "model_id": "doubao-seed-2-5",
+     "name": "Doubao Seed 2.5（方舟）",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 0.8,
+     "output_price_per_million": 2.0,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.1127,
+     "output_price_usd_per_million": 0.2817,
+     "sources": [
+      {
+       "name": "火山方舟 · 文档中心（模型列表/价格入口）",
+       "url": "https://www.volcengine.com/docs/82379/109932",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "OpenRouter · Models catalog API",
+       "url": "https://openrouter.ai/api/v1/models",
+       "kind": "aggregate",
+       "as_of": "2026-10-20",
+       "note": "聚合目录 470 个模型；为目录价（含平台费），非厂商原价"
+      }
+     ],
+     "cross_check": "上架确认 + 聚合价",
+     "uid": "火山方舟 :: doubao-seed-2-5"
+    },
+    {
+     "model_id": "deepseek-v4.1-flash",
+     "name": "DeepSeek V4.1 Flash（方舟，1017 版）",
+     "category": "general",
+     "context_length": 1048576,
+     "currency": "CNY",
+     "input_price_per_million": 0.3,
+     "output_price_per_million": 1.2,
+     "cache_hit_input_per_million": null,
+     "cache_hit_input_usd_per_million": null,
+     "input_price_usd_per_million": 0.0423,
+     "output_price_usd_per_million": 0.169,
+     "sources": [
+      {
+       "name": "火山方舟 · 文档中心（模型列表/价格入口）",
+       "url": "https://www.volcengine.com/docs/82379/109932",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      },
+      {
+       "name": "DeepSeek API Docs · Models & Pricing",
+       "url": "https://api-docs.deepseek.com/quick_start/pricing",
+       "kind": "official",
+       "as_of": "2026-10-20",
+       "note": ""
+      }
+     ],
+     "cross_check": "双源一致",
+     "note": "方舟文档首页标注「DeepSeek-V4.1-Flash（升级 1017）」，说明方舟按上游版本同步",
+     "uid": "火山方舟 :: deepseek-v4.1-flash"
+    }
+   ],
+   "catalog_model_count": 24,
+   "pricing_status": "文档可达、价格需登录",
+   "pricing_note": "方舟文档中心可直连（200），模型价格页 82379/1544106 需登录控制台渲染，未取到匿名单价",
+   "latest_news_url": "https://www.volcengine.com/docs/82379/109932"
+  }
+ ],
+ "provider_news": [
+  {
+   "provider": "OpenAI",
+   "source_type": "国内资讯站 + 聚合网关（官方页 403 不可达）",
+   "source_url": "https://openai.com/news/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "传 OpenAI 于 11 月推送 GPT-6.1 后续 Sol/Luna 分层套餐（第三方报道，官方页 403 未核验",
+     "date": "",
+     "url": "",
+     "source": "量子位"
+    },
+    {
+     "title": "GPT-6 系列在 OpenRouter 目录上架 Sol / Sol Pro / Luna / Astra 四档",
+     "date": "2026-10-20",
+     "url": "https://openrouter.ai/api/v1/models",
+     "source": "OpenRouter 目录"
+    }
+   ],
+   "note": "openai.com 本机 HTTP 403，无法取官方新闻列表；条目来自国内可检索资讯站与 OpenRouter 目录，已标注来源"
+  },
+  {
+   "provider": "Anthropic",
+   "source_type": "官方可达 + 国内资讯站交叉",
+   "source_url": "https://www.anthropic.com/news",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Claude Cowork 并入 Claude 主产品，向 Pro 与 Max 推送",
+     "date": "",
+     "url": "https://www.anthropic.com/pricing",
+     "source": "Anthropic 定价页公告条"
+    },
+    {
+     "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
+     "date": "",
+     "url": "https://www.anthropic.com/news",
+     "source": "Anthropic News"
+    },
+    {
+     "title": "Preparing for the 2026 US midterms",
+     "date": "",
+     "url": "https://www.anthropic.com/news",
+     "source": "Anthropic News"
+    },
+    {
+     "title": "Introducing the Anthropic Cyber Mission",
+     "date": "",
+     "url": "https://www.anthropic.com/news",
+     "source": "Anthropic News"
+    },
+    {
+     "title": "Previewing the Model Hardware Standard",
+     "date": "",
+     "url": "https://www.anthropic.com/news",
+     "source": "Anthropic News"
+    },
+    {
+     "title": "Our position on open-weights models",
+     "date": "",
+     "url": "https://www.anthropic.com/news",
+     "source": "Anthropic News"
+    },
+    {
+     "title": "Claude 新模型曝光！能跳出思维定势，修 Bug 治标又治本",
+     "date": "2026-10-20",
+     "url": "https://www.qbitai.com/2026-10-504314.html",
+     "source": "量子位"
+    }
+   ],
+   "note": "官方新闻条目未输出发布日期（前端渲染），日期栏留空；量子位条目为国内可检索交叉源"
+  },
+  {
+   "provider": "Google Gemini",
+   "source_type": "国内资讯站（官方站超时）",
+   "source_url": "https://blog.google/technology/ai/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Gemini 3.8 Flash / Flash-Lite 在聚合目录上架，上下文统一 1M",
+     "date": "2026-10-20",
+     "url": "https://openrouter.ai/api/v1/models",
+     "source": "OpenRouter 目录"
+    },
+    {
+     "title": "blog.google/technology/ai 本机连接超时，官方新闻未取回",
+     "date": "",
+     "url": "https://blog.google/technology/ai/",
+     "source": "官方入口（不可达）"
+    }
+   ],
+   "note": "ai.google.dev 与 blog.google 本机连接超时（大陆不可直连），条目取自可核验聚合目录与国内资讯站"
+  },
+  {
+   "provider": "Mistral",
+   "source_type": "国内资讯站（官方站超时）",
+   "source_url": "https://mistral.ai/news",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Mistral Large 4 目录价 $0.68/$2.09 每百万 tokens（经聚合网关确认）",
+     "date": "2026-10-20",
+     "url": "https://openrouter.ai/api/v1/models",
+     "source": "OpenRouter 目录"
+    },
+    {
+     "title": "mistral.ai/news 本机超时，官方公告未取回",
+     "date": "",
+     "url": "https://mistral.ai/news",
+     "source": "官方入口（不可达）"
+    }
+   ],
+   "note": "docs.mistral.ai 与 mistral.ai 本机连接超时"
+  },
+  {
+   "provider": "Cohere",
+   "source_type": "官方可达（无独立新闻流）",
+   "source_url": "https://cohere.com/blog",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "docs.cohere.com/docs/pricing 已下线（404），价格说明并入 Models 页",
+     "date": "2026-10-20",
+     "url": "https://docs.cohere.com/docs/models",
+     "source": "Cohere Docs"
+    },
+    {
+     "title": "Command A+（command-a-plus-05-2026）状态 Live，192K 上下文",
+     "date": "2026-10-20",
+     "url": "https://docs.cohere.com/docs/models",
+     "source": "Cohere Docs"
+    }
+   ],
+   "note": "cohere.com/blog 取回 200 但条目为前端渲染，未解析出标题列表"
+  },
+  {
+   "provider": "xAI",
+   "source_type": "国内可检索源（官方站超时）",
+   "source_url": "https://x.ai/news",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Grok 4.7 / 4.6 / 4.5 同价 $2/$6 每百万 tokens（500K 上下文）",
+     "date": "2026-10-20",
+     "url": "https://openrouter.ai/api/v1/models",
+     "source": "OpenRouter 目录"
+    },
+    {
+     "title": "Grok 4.20 multi-agent 支持 2M 上下文",
+     "date": "2026-10-20",
+     "url": "https://openrouter.ai/api/v1/models",
+     "source": "OpenRouter 目录"
+    }
+   ],
+   "note": "docs.x.ai 与 x.ai/news 本机超时；旧路径 docs.x.ai/docs/models 已 404"
+  },
+  {
+   "provider": "Groq",
+   "source_type": "国内可检索源",
+   "source_url": "https://groq.com/newsroom/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "GPT-OSS 120B 经 Groq 托管上架聚合目录（$0.15/$0.6）",
+     "date": "2026-10-20",
+     "url": "https://openrouter.ai/api/v1/models",
+     "source": "OpenRouter 目录"
+    }
+   ],
+   "note": "console.groq.com/docs/pricing 本机未核验"
+  },
+  {
+   "provider": "DeepSeek",
+   "source_type": "官方可达 + 国内资讯站交叉",
+   "source_url": "https://api-docs.deepseek.com/news",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "DeepSeek V4.1 Flash-1017 登顶 Agent Arena 开源榜，总榜第 11",
+     "date": "2026-10-20",
+     "url": "https://www.ithome.com/1/015/370.htm",
+     "source": "IT之家"
+    },
+    {
+     "title": "Search / Fetch API 上线；2026-11-01 00:00（北京时间）起服务端工具调用按 $0.75/1000 次计费",
+     "date": "2026-10-20",
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "source": "DeepSeek 官方文档"
+    },
+    {
+     "title": "DeepSeek Harness 进入开发者预览，面向 Agent harness 开发者",
+     "date": "2026-10-20",
+     "url": "https://api-docs.deepseek.com/news",
+     "source": "DeepSeek 官方 News"
+    },
+    {
+     "title": "legacy 名称 deepseek-v4-flash / -vision-exp 仍接受但模型已退役，请求由 V4.1-Flash-1017 承接并按 Flash 价计费",
+     "date": "2026-10-20",
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "source": "DeepSeek 官方文档"
+    },
+    {
+     "title": "我向新版 DeepSeek 许了个愿，4 块钱让特斯拉飞起来",
+     "date": "2026-10-19",
+     "url": "https://www.ifanr.com/1684880",
+     "source": "爱范儿"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "provider": "Kimi",
+   "source_type": "官方可达",
+   "source_url": "https://platform.moonshot.cn/docs/news",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Kimi K3 旗舰模型正式发布（开放平台首页横幅）",
+     "date": "2026-10-20",
+     "url": "https://platform.moonshot.cn/docs/pricing",
+     "source": "Kimi 开放平台"
+    },
+    {
+     "title": "K3 系列引入上下文缓存 TTL 分档计费：5min ¥20 / 1h ¥40 每百万 tokens",
+     "date": "2026-10-20",
+     "url": "https://platform.kimi.com/docs/pricing/chat.md",
+     "source": "Kimi 定价文档"
+    },
+    {
+     "title": "批量推理 Batch API 费用为标准价 60%，不受实时并发限制",
+     "date": "2026-10-20",
+     "url": "https://platform.kimi.com/docs/pricing/batch.md",
+     "source": "Kimi 批量推理定价"
+    }
+   ],
+   "note": "news 页取回 7 KB 但条目为前端渲染，价格类更新已从官方 Markdown 文档直接核验"
+  },
+  {
+   "provider": "GLM",
+   "source_type": "官方可达（定价页需 JS）+ 国内镜像源",
+   "source_url": "https://www.zhipuai.cn/zh/news",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "GLM-5.3：前沿编程能力与涌现的网络安全能力，面向复杂软件工程与长程 Agent 任务，支持 1M 上下文",
+     "date": "2026-10-20",
+     "url": "https://www.zhipuai.cn/zh",
+     "source": "智谱官网"
+    },
+    {
+     "title": "GLM-5.3 为编程能力最强的开源模型，多项公开基准取得开源第一；完整权重两周内开放",
+     "date": "",
+     "url": "https://www.zhipuai.cn/zh/news",
+     "source": "智谱新闻"
+    },
+    {
+     "title": "智谱发布首份业绩报告，并公布 2025 年度业绩发布会安排",
+     "date": "",
+     "url": "https://www.zhipuai.cn/zh/news",
+     "source": "智谱新闻"
+    },
+    {
+     "title": "硅基流动上线高速版 GLM-5.3-Flash（GLM-5 系列首款原生多模态模型）",
+     "date": "2026-10-15",
+     "url": "https://siliconflow.cn/news",
+     "source": "硅基流动动态"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "provider": "通义千问",
+   "source_type": "官方可达",
+   "source_url": "https://help.aliyun.com/zh/model-studio/release-notes",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "百炼模型大全更新：qwen3.8-max / qwen3.7-plus / qwen3.8-flash / qwen3.8-omni-flash-realtime 分模态矩阵",
+     "date": "2026-10-20",
+     "url": "https://help.aliyun.com/zh/model-studio/models",
+     "source": "阿里云百炼文档"
+    },
+    {
+     "title": "百炼上架第三方模型：deepseek-v4-pro-0813、deepseek-v4.1-flash、kimi/kimi-k3、glm-5.2、ZHIPU/GLM-5.3、MiniMax-M3、mimo-v2.5-pro",
+     "date": "2026-10-20",
+     "url": "https://help.aliyun.com/zh/model-studio/models",
+     "source": "阿里云百炼文档"
+    },
+    {
+     "title": "新增世界模型（happyoyster-1.0 adventure/directing/acting，邀测）与决策模型 decision-model-preview",
+     "date": "2026-10-20",
+     "url": "https://help.aliyun.com/zh/model-studio/models",
+     "source": "阿里云百炼文档"
+    },
+    {
+     "title": "Qwen3Guard：面向 token 流的实时安全护栏模型发布",
+     "date": "",
+     "url": "https://qwenlm.github.io/blog/",
+     "source": "Qwen Blog"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "provider": "豆包",
+   "source_type": "官方可达（价格页需登录）",
+   "source_url": "https://www.volcengine.com/product/doubao",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "方舟文档新增 Seed-Evolving 模型页；DeepSeek-V4.1-Flash（升级 1017）在方舟上架",
+     "date": "2026-10-20",
+     "url": "https://www.volcengine.com/docs/82379/109932",
+     "source": "火山方舟"
+    },
+    {
+     "title": "Doubao Seedance 2.5 视频生成、Seedream 5.0 pro/flash 图像生成教程与提示词指南上线",
+     "date": "2026-10-20",
+     "url": "https://www.volcengine.com/docs/82379/109932",
+     "source": "火山方舟"
+    },
+    {
+     "title": "豆包助手（tool-use）与联网搜索工具进入文档体系",
+     "date": "2026-10-20",
+     "url": "https://www.volcengine.com/docs/82379/109932",
+     "source": "火山方舟"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "provider": "MiniMax",
+   "source_type": "官方可达",
+   "source_url": "https://www.minimaxi.com/news",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "MiniMax M3.1 Flash：输入 ¥1 / 输出 ¥4 / 缓存读取 ¥0.1 每百万 tokens，Agentic 任务综合成本较前代降 70%",
+     "date": "2026-10-20",
+     "url": "https://platform.minimaxi.com/document/pricing",
+     "source": "MiniMax 定价文档"
+    },
+    {
+     "title": "M3.1 Flash 采用更激进稀疏注意力架构，日常输出 200+ TPS（P50 稳定 170+ TPS）",
+     "date": "2026-10-20",
+     "url": "https://platform.minimaxi.com/document/pricing",
+     "source": "MiniMax 定价文档"
+    },
+    {
+     "title": "MiniMax H3 通用全模态生成模型：统一理解文本/图像/视频/声音，原生双声道音视频，最高 15s 2K",
+     "date": "2026-10-20",
+     "url": "https://platform.minimaxi.com/document/pricing",
+     "source": "MiniMax 定价文档"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "provider": "StepFun",
+   "source_type": "官方可达",
+   "source_url": "https://www.stepfun.com/blog",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "Step 5 Preview 缓存命中输入价自 2026-10-14 00:30（北京时间）起由 ¥0.35 调至 ¥0.70",
+     "date": "2026-10-14",
+     "url": "https://platform.stepfun.com/docs/zh/announcements/step-5-preview-price-adjustment.md",
+     "source": "阶跃星辰公告"
+    },
+    {
+     "title": "Step 5 Preview / Step 3.7 Flash / Step 3.5 Flash 三档文本模型定价公开",
+     "date": "2026-10-20",
+     "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+     "source": "阶跃星辰 API 定价"
+    },
+    {
+     "title": "StepAudio 3 realtime / chat / gen / music preview 限时免费",
+     "date": "2026-10-20",
+     "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+     "source": "阶跃星辰 API 定价"
+    }
+   ],
+   "note": "旧路径 /docs/pricing/overview 已 404，正确入口为 /docs/zh/guides/pricing/details.md"
+  },
+  {
+   "provider": "ZeroOne",
+   "source_type": "国内资讯站（官方不可达）",
+   "source_url": "https://www.jiqizhixin.com/",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "官网定价页 404、yi.com 域名解析失败，暂无可核验官方动态",
+     "date": "2026-10-20",
+     "url": "https://www.jiqizhixin.com/",
+     "source": "机器之心（资讯入口）"
+    },
+    {
+     "title": "零一万物商业化相关报道散见于国内资讯站，官方未形成稳定新闻流",
+     "date": "",
+     "url": "https://www.qbitai.com/feed",
+     "source": "量子位"
+    }
+   ],
+   "note": ""
+  },
+  {
+   "provider": "腾讯混元",
+   "source_type": "官方可达",
+   "source_url": "https://cloud.tencent.com/document/product/1729/97731",
+   "crawled_at": "2026-10-20",
+   "items": [
+    {
+     "title": "混元大模型计费文档可直连，含按量计费与峰谷时段说明",
+     "date": "2026-10-20",
+     "url": "https://cloud.tencent.com/document/product/1758/101818",
+     "source": "腾讯云文档"
+    },
+    {
+     "title": "Hy4 preview 上线聚合平台：输入 ¥6 / 输出 ¥18 / 缓存 ¥0.3 每百万 tokens",
+     "date": "2026-10-20",
+     "url": "https://siliconflow.cn/pricing",
+     "source": "硅基流动价格中心"
+    },
+    {
+     "title": "Hunyuan-MT-7B（翻译）在聚合平台以免费档提供",
+     "date": "2026-10-20",
+     "url": "https://siliconflow.cn/pricing",
+     "source": "硅基流动价格中心"
+    }
+   ],
+   "note": ""
+  }
+ ],
+ "peak_valley": [
+  {
+   "provider": "DeepSeek",
+   "scope": "官方 API（deepseek-flash / deepseek-v4-pro 全模型）",
+   "tz": "UTC（官方原文口径）",
+   "peak_windows": "周一~周五 01:00-04:00 与 06:00-10:00 UTC（不含中国法定节假日）",
+   "valley_windows": "其余全部时段，含周末与中国法定节假日全天",
+   "discount": "谷时（off-peak）价格为峰时的一半",
+   "multiplier": {
+    "peak": 2.0,
+    "valley": 0.5
+   },
+   "evidence": "Peak hours are 01:00 - 04:00 and 06:00 - 10:00 UTC, Monday through Friday, excluding Chinese public holidays. All other hours are off-peak. Off-peak rates are half of the peak rates.",
+   "source": {
+    "name": "DeepSeek API Docs · Models & Pricing",
+    "url": "https://api-docs.deepseek.com/quick_start/pricing",
+    "kind": "official",
+    "as_of": "2026-10-20",
+    "note": ""
+   },
+   "note": "DeepSeek 是唯一公开「×2 峰时加价」机制的厂商；其余均为「谷时降价」表述",
+   "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+   "source_name": "DeepSeek API Docs · Models & Pricing"
+  },
+  {
+   "provider": "SiliconFlow",
+   "scope": "DeepSeek V4.1 Flash / V4-Flash 镜像档位",
+   "tz": "北京时间（费用发生时段口径）",
+   "peak_windows": "02:00-08:00",
+   "valley_windows": "00:00-02:00 与 08:00-24:00",
+   "discount": "V4.1 Flash：谷档 ¥2/¥8/缓存¥0.04，峰档 ¥1/¥4/缓存¥0.02（峰档单价更低，属错峰容量定价）",
+   "multiplier": {
+    "peak": 0.5,
+    "valley": 2.0
+   },
+   "evidence": "费用发生时段: 2点～8点 ¥1.00/¥4.00/¥0.02 与 0点～2点/8点～24点 ¥2.00/¥8.00/¥0.04 并列展示",
+   "source": {
+    "name": "硅基流动 · 模型价格中心",
+    "url": "https://siliconflow.cn/pricing",
+    "kind": "aggregate",
+    "as_of": "2026-10-20",
+    "note": ""
+   },
+   "note": "与 DeepSeek 官方峰谷方向相反，属聚合商自有容量档位；采购前须核对价格卡",
+   "source_url": "https://siliconflow.cn/pricing",
+   "source_name": "硅基流动 · 模型价格中心"
+  },
+  {
+   "provider": "SiliconFlow",
+   "scope": "Hunyuan A13B Instruct 镜像档位",
+   "tz": "北京时间",
+   "peak_windows": "09:00-18:00（¥1/¥4）",
+   "valley_windows": "00:00-09:00 与 18:00-24:00（¥0.8/¥3.2）",
+   "discount": "谷时 −20%",
+   "multiplier": {
+    "peak": 1.25,
+    "valley": 1.0
+   },
+   "evidence": "费用发生时段: 9点～18点 ¥1.00/¥4.00；0点～9点/18点～24点 ¥0.80/¥3.20",
+   "source": {
+    "name": "硅基流动 · 模型价格中心",
+    "url": "https://siliconflow.cn/pricing",
+    "kind": "aggregate",
+    "as_of": "2026-10-20",
+    "note": ""
+   },
+   "source_url": "https://siliconflow.cn/pricing",
+   "source_name": "硅基流动 · 模型价格中心"
+  },
+  {
+   "provider": "Kimi",
+   "scope": "批量推理 Batch API（kimi-k2.7-code / kimi-k2.6）",
+   "tz": "无时段限制",
+   "peak_windows": "不适用",
+   "valley_windows": "随时可用（异步，需 completion_window 内完成）",
+   "discount": "标准价 60%（kimi-k2.7-code 输入¥3.90/输出¥16.20；kimi-k2.6 输入¥3.90/输出¥16.20）",
+   "multiplier": {
+    "peak": null,
+    "valley": 0.6
+   },
+   "evidence": "Batch API 费用为标准模型价格的 60%，不受实时并发限制",
+   "source": {
+    "name": "Kimi 开放平台 · 模型推理价格说明",
+    "url": "https://platform.kimi.com/docs/pricing/chat.md",
+    "kind": "official",
+    "as_of": "2026-10-20",
+    "note": ""
+   },
+   "note": "Kimi 实时 API 本身无峰谷计价，用 Batch 替代谷时段策略",
+   "source_url": "https://platform.kimi.com/docs/pricing/chat.md",
+   "source_name": "Kimi 开放平台 · 模型推理价格说明"
+  },
+  {
+   "provider": "OpenRouter",
+   "scope": "Batch API（全目录模型）",
+   "tz": "无时段限制",
+   "peak_windows": "不适用",
+   "valley_windows": "随时可用（异步打包）",
+   "discount": "半价（50%）",
+   "multiplier": {
+    "peak": null,
+    "valley": 0.5
+   },
+   "evidence": "Announcements 2026-09-22：Batch API — half-price inference by bundling requests",
+   "source": {
+    "name": "OpenRouter · Announcements",
+    "url": "https://openrouter.ai/announcements",
+    "kind": "aggregate",
+    "as_of": "2026-10-20",
+    "note": ""
+   },
+   "source_url": "https://openrouter.ai/announcements",
+   "source_name": "OpenRouter · Announcements"
+  },
+  {
+   "provider": "Anthropic / Google Gemini / xAI",
+   "scope": "官网未公开峰谷计价",
+   "tz": "不适用",
+   "peak_windows": "未公开",
+   "valley_windows": "未公开",
+   "discount": "无公开时段折扣（Google Gemini 有 batch 端点，折扣口径随版本变化）",
+   "multiplier": {
+    "peak": null,
+    "valley": null
+   },
+   "evidence": "anthropic.com/pricing 仅订阅价；ai.google.dev 与 x.ai 本机不可达，未见峰谷条款",
+   "source": {
+    "name": "Anthropic · Plans & pricing",
+    "url": "https://www.anthropic.com/pricing",
+    "kind": "official",
+    "as_of": "2026-10-20",
+    "note": "可取回 200，但仅订阅价（Free/Pro/Max），无 API 单价表"
+   },
+   "note": "字段留空而非编造折扣率；后续由具备境外网络的运维在官方文档补齐",
+   "source_url": "https://www.anthropic.com/pricing",
+   "source_name": "Anthropic · Plans & pricing"
+  }
+ ],
+ "source_health": [
+  {
+   "url": "https://api-docs.deepseek.com/quick_start/pricing",
+   "ok": true,
+   "bytes": 3611,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.kimi.com/docs/pricing/chat.md",
+   "ok": true,
+   "bytes": 2963,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.kimi.com/docs/pricing/batch.md",
+   "ok": true,
+   "bytes": 1723,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+   "ok": true,
+   "bytes": 2219,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.stepfun.com/docs/zh/announcements/step-5-preview-price-adjustment.md",
+   "ok": true,
+   "bytes": 760,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://siliconflow.cn/pricing",
+   "ok": true,
+   "bytes": 6552,
+   "kind": "vendor_official_aggregate",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://siliconflow.cn/news",
+   "ok": true,
+   "bytes": 2096,
+   "kind": "vendor_official_aggregate",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://help.aliyun.com/zh/model-studio/models",
+   "ok": true,
+   "bytes": 2269,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://cloud.tencent.com/document/product/1758/101818",
+   "ok": true,
+   "bytes": 9367,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.volcengine.com/docs/82379/109932",
+   "ok": true,
+   "bytes": 189470,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://openrouter.ai/api/v1/models",
+   "ok": true,
+   "bytes": 2000000,
+   "kind": "aggregator_catalog_api",
+   "as_of": "2026-10-20",
+   "note": "470 模型 JSON"
+  },
+  {
+   "url": "https://openrouter.ai/announcements",
+   "ok": true,
+   "bytes": 6634,
+   "kind": "aggregator_announcements",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.minimaxi.com/document/pricing",
+   "ok": true,
+   "bytes": 109746,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.anthropic.com/pricing",
+   "ok": true,
+   "bytes": 2636,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "note": "仅订阅价"
+  },
+  {
+   "url": "https://www.anthropic.com/news",
+   "ok": true,
+   "bytes": 252345,
+   "kind": "vendor_news",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.zhipuai.cn/zh",
+   "ok": true,
+   "bytes": 60722,
+   "kind": "vendor_news",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://docs.cohere.com/docs/models",
+   "ok": true,
+   "bytes": 22915,
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://open.bigmodel.cn/pricing",
+   "ok": true,
+   "bytes": 127,
+   "kind": "vendor_official_js_shell",
+   "as_of": "2026-10-20",
+   "note": "200 但为 JS 空壳，需登录渲染"
+  },
+  {
+   "url": "https://www.volcengine.com/docs/82379/1544106",
+   "ok": true,
+   "bytes": 60,
+   "kind": "vendor_official_login_required",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://openai.com/news/",
+   "ok": false,
+   "error": "HTTP 403 Forbidden",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "retry_count": 3
+  },
+  {
+   "url": "https://platform.openai.com/docs/pricing",
+   "ok": false,
+   "error": "HTTP 403 Forbidden",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "retry_count": 2
+  },
+  {
+   "url": "https://docs.x.ai/developers/models",
+   "ok": false,
+   "error": "connect timeout (15s)",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "retry_count": 3
+  },
+  {
+   "url": "https://docs.x.ai/docs/models",
+   "ok": false,
+   "error": "HTTP 404",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://docs.mistral.ai/getting-started/models/models_overview/",
+   "ok": false,
+   "error": "connect timeout (15s)",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "retry_count": 3
+  },
+  {
+   "url": "https://ai.google.dev/gemini-api/docs/pricing",
+   "ok": false,
+   "error": "connect timeout (15s)",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20",
+   "retry_count": 3
+  },
+  {
+   "url": "https://docs.cohere.com/docs/pricing",
+   "ok": false,
+   "error": "HTTP 404",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.lingyiwanwu.com/pricing",
+   "ok": false,
+   "error": "HTTP 404",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.lingyiwanwu.com/docs/pricing",
+   "ok": false,
+   "error": "HTTP 404",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.yi.com/price",
+   "ok": false,
+   "error": "getaddrinfo failed",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://platform.stepfun.com/docs/pricing/overview",
+   "ok": false,
+   "error": "HTTP 404",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://docs.siliconflow.cn/cn/userguide/pricing",
+   "ok": false,
+   "error": "HTTP 404",
+   "kind": "vendor_official",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.jiqizhixin.com/rss",
+   "ok": true,
+   "bytes": 3375,
+   "kind": "news_rss",
+   "as_of": "2026-10-20",
+   "note": "仅广告条目，正文需 JS 渲染"
+  },
+  {
+   "url": "https://www.qbitai.com/feed",
+   "ok": true,
+   "bytes": 6345,
+   "kind": "news_rss",
+   "as_of": "2026-10-20",
+   "items": 10
+  },
+  {
+   "url": "https://www.ifanr.com/feed",
+   "ok": true,
+   "items": 10,
+   "kind": "news_rss",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.ithome.com/rss/",
+   "ok": true,
+   "items": 10,
+   "kind": "news_rss",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://m.leiphone.com/feed",
+   "ok": true,
+   "items": 9,
+   "kind": "news_rss",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.infoq.cn/static/rss/out/691.xml",
+   "ok": false,
+   "error": "empty feed body",
+   "kind": "news_rss",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.cnbeta.com.tw/backend.php",
+   "ok": false,
+   "error": "empty feed body",
+   "kind": "news_rss",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://api-docs.deepseek.com/news",
+   "ok": true,
+   "bytes": 3847,
+   "kind": "vendor_news",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.sinsytech.com/rss.xml",
+   "ok": false,
+   "error": "getaddrinfo failed",
+   "kind": "news_rss",
+   "as_of": "2026-10-20"
+  },
+  {
+   "url": "https://www.newhua.com/feed",
+   "ok": false,
+   "error": "empty feed body",
+   "kind": "news_rss",
+   "as_of": "2026-10-20"
+  }
+ ],
+ "unresolved": [
+  "openai.com 全域（pricing/news）本机 HTTP 403：OpenAI 官方单价与新闻待境外网络核验，现全部来自 OpenRouter 目录价",
+  "docs.x.ai / x.ai/news / docs.mistral.ai / mistral.ai/news / ai.google.dev / blog.google：本机连接超时（大陆网络不可达）",
+  "docs.cohere.com/docs/pricing 已 404；cohere.com/blog 前端渲染未解析出条目",
+  "open.bigmodel.cn/pricing：JS 空壳 + 需登录，GLM 单价取自硅基流动镜像页与阿里云百炼上架信息",
+  "www.volcengine.com/docs/82379/1544106 与 /pricing?product=Ark：需登录控制台，豆包官方 tokens 单价未取到",
+  "platform.lingyiwanwu.com 定价路径 404 且 yi.com 域名解析失败：ZeroOne 价格完全不可核验",
+  "机器之心正文与 RSS 需 JS 渲染/仅广告条目：新闻区块改用量子位/IT之家/爱范儿/雷峰网四路 RSS",
+  "anthropic.com/pricing 仅含订阅计划价：Claude API 每百万 tokens 单价需在 platform 控制台确认"
+ ],
+ "deprecated_paths": [
+  {
+   "from": "https://docs.x.ai/docs/models",
+   "to": "https://docs.x.ai/developers/models",
+   "error": "404"
+  },
+  {
+   "from": "https://platform.stepfun.com/docs/pricing/overview",
+   "to": "https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+   "error": "404"
+  },
+  {
+   "from": "https://docs.siliconflow.cn/cn/userguide/pricing",
+   "to": "https://siliconflow.cn/pricing",
+   "error": "404"
+  },
+  {
+   "from": "https://docs.cohere.com/docs/pricing",
+   "to": "https://docs.cohere.com/docs/models",
+   "error": "404"
+  }
+ ],
+ "legacy_note": "v1 旧字段 provider/description/context_length 已保留在 provider.name 与 model.note 中，前端同时读新字段 v2 与旧字段以兼容缓存。"
 }
